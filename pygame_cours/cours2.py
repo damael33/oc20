@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 
 BLACK = (0, 0, 0)
 GRAY = (127, 127, 127)
@@ -13,22 +14,34 @@ background = GRAY
 
 pygame.init()
 screen = pygame.display.set_mode((640, 240))
-
+start = (0, 0)
+size = (0, 0)
+rect_list = []
+drawing = False
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        elif event.type == MOUSEBUTTONDOWN:
+            start = event.pos
+            size = 0, 0
+            drawing = True
+        elif event.type == MOUSEBUTTONUP:
+            end = event.pos
+            size = end[0] - start[0], end[1] - start[1]
+            drawing = False
+            rect = pygame.Rect(start, size)
+            rect_list.append(rect)
+            drawing = False
+        elif event.type == MOUSEMOTION and drawing:
+            end = event.pos
+            size = end[0] - start[0], end[1] - start[1]
 
-    screen.fill(background)
-    pygame.draw.rect(screen, RED, (50, 20, 120, 100))
-    pygame.draw.rect(screen, GREEN, (100, 60, 120, 100))
-    pygame.draw.rect(screen, BLUE, (150, 100, 120, 100))
-
-    pygame.draw.rect(screen, RED, (350, 20, 120, 100), 1)
-    pygame.draw.rect(screen, GREEN, (400, 60, 120, 100), 4)
-    pygame.draw.rect(screen, BLUE, (450, 100, 120, 100), 8)
-    pygame.display.update()
-    
-    
+        screen.fill(GRAY)
+        for rect in rect_list:
+             pygame.draw.rect(screen, RED, rect, 3)
+        pygame.draw.rect(screen, RED, (start, size), 1)
+        pygame.display.update()
+        
 pygame.quit()
