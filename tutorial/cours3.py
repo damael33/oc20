@@ -1,24 +1,24 @@
-import pygame
-from pygame.locals import *
+from rect import *
 
-SIZE = 500, 200
-RED = (255, 0, 0)
-GRAY = (150, 150, 150)
+rect = Rect(100, 50, 50, 50)
+v = [2, 2]
 
-pygame.init()
-screen = pygame.display.set_mode(SIZE)
-
-rect = Rect(50, 60, 200, 80)
-print(f'x={rect.x}, y={rect.y}, w={rect.w}, h={rect.h}')
-print(f'left={rect.left}, top={rect.top}, right={rect.right}, bottom={rect.bottom}')
-print(f'center={rect.center}')
-
-running = True
 while running:
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
 
+    rect.move_ip(v)
+
+    if rect.left < 0:
+        v[0] *= -1
+    if rect.right > width:
+        v[0] *= -1
+    if rect.top < 0:
+        v[1] *= -1
+    if rect.bottom > height:
+        v[1] *= -1
+   
     screen.fill(GRAY)
     pygame.draw.rect(screen, RED, rect)
     pygame.display.flip()
