@@ -23,7 +23,7 @@ rect.center = w//2, h//2
 moving = False
 
 angle = 0
-scale = 0
+scale = 1
 
 mouse = pygame.mouse.get_pos()
 
