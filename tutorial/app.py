@@ -23,7 +23,7 @@ class Text:
         self.img = self.font.render(self.text, True, self.fontcolor)
         self.rect = self.img.get_rect()
         self.rect.topleft = self.pos
-
+        
     def draw(self):
         """Draw the text image to the screen."""
         App.screen.blit(self.img, self.rect)
@@ -91,6 +91,31 @@ class App:
         self.flags ^= NOFRAME
         pygame.display.set_mode(self.rect.size, self.flags)
         
+
+class Scene:
+    """Create a new scene (room, level, view)."""
+    id = 0
+    bg = Color('gray')
+    
+    def __init__(self, *arg, **kwargs):
+        # Append a new scene and make it the curent scene
+        App.scenes.append(self)
+        App.scene = self
         
+        self.id = Scene.id
+        Scene.id += 1
+        self.nodes = []
+        self.bg = Scene.bg
+        
+    def draw(self):
+        """Draw all objects in the scene"""
+        App.screen.fill(self.bg)
+        for node in self.nodes:
+            node.draw()
+        pygame.display.flip()
+        
+    def __str__(self):
+        return 'Scene {}'.format(self.id)
+
 if __name__ == '__main__':
     App().run()
