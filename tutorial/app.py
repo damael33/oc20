@@ -31,6 +31,8 @@ class Text:
 class App:
     """Create a single-window app with multiple scenes."""
 
+    scenes = []
+    scene = None
     def __init__(self):
         """Initialize pygame and the application."""
         pygame.init()

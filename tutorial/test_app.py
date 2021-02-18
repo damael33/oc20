@@ -5,16 +5,16 @@ class Demo(App):
         super().__init__()
         
         Scene(caption = 'Intro')
-        Text('Scene 0')
-        Text('Introduction screen the app')
+        Text('Scene 0', (20, 20))
+        Text('Introduction screen the app', (20, 50))
 
         Scene(bg=Color('yellow'), caption='Options')
-        Text('Scene 1')
-        Text('Option screen of the app')
+        Text('Scene 1', (20, 20))
+        Text('Option screen of the app', (20, 50))
 
         Scene(bg=Color('green'), caption='Main')
-        Text('Scene 2')
-        Text('Main screen of the app')
+        Text('Scene 2', (20, 20))
+        Text('Main screen of the app', (20, 50))
         
         App.scene = App.scenes[0]
 
