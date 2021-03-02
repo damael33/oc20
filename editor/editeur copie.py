@@ -13,7 +13,7 @@ ScreenBackground = BLACK
 
 
 #key dict pour savoir quelle forme faire
-key_dict1 = {K_p:'rectangle', K_l:'ellipse', K_m:'polygone', K_n:'image'}
+key_dict1 = {K_p:'rectangle', K_l:'ellipse', K_m:'polygone', K_n:'image', K_d:'deplace'}
 forme = 'rectangle'
 
 #crée l'écran
@@ -51,18 +51,7 @@ POLYGON_COLOR = RED
 POLYGON_WIDTH = 2
 
 #image
-module = sys.modules['__main__']
-path, name = os.path.split(module.__file__)
-path = os.path.join(path, 'bird.png')
-img0 = pygame.image.load('bird.png')
-img0.convert()
-rect0 = img0.get_rect()
-center = 800//2, 600//2
-img = img0
-rect = img.get_rect()
-rect.center = center
-angle = 0
-scale = 1
+img_list = []
 
 
 #boucle editeur
@@ -146,65 +135,63 @@ while running:
 
     #####################################################################################################
         if forme == 'image':
+            module = sys.modules['__main__']
+            path, name = os.path.split(module.__file__)
+            path = os.path.join(path, 'bird.png')
+            img = pygame.image.load('bird.png')
+            img.convert()
+            rect = img.get_rect()
+            center = 800//2, 600//2
+            rect.center = center
+            angle = 0
+            scale = 1
+            img_list.append(img)
             
-            mouse = pygame.mouse.get_pos()
-            pygame.draw.line(screen, GREEN, center, mouse, 1)
             if event.type == KEYDOWN:
                 if event.key == K_r:
                     if event.mod & KMOD_SHIFT:
                         angle -= 10
                     else:
                         angle += 10
-                    img = pygame.transform.rotozoom(img0, angle, scale)
+                    img_list[-1] = pygame.transform.rotozoom(img_list[-1], angle, scale)
 
                 elif event.key == K_s:
                     if event.mod & KMOD_SHIFT:
                         scale /= 1.1
                     else:
                         scale *= 1.1
-                    img = pygame.transform.rotozoom(img0, angle, scale)
-
-                elif event.key == K_o:
-                    img = img0
-                    angle = 0
-                    scale = 1
-
+                    img_list[-1] = pygame.transform.rotozoom(img_list[-1], angle, scale)
+                
                 elif event.key == K_h:
-                    img = pygame.transform.flip(img, True, False)
-            
+                    img_list[-1] = pygame.transform.flip(img_list[-1], True, False)
+                    
                 elif event.key == K_v:
-                    img = pygame.transform.flip(img, False, True)
+                    img_list[-1] = pygame.transform.flip(img_list[-1], False, True)
+    
+###########################################################################################################
+        
+        if forme == 'deplace':
+            print('moving mode')
+            moving = False
+            
+            if event.type == MOUSEBUTTONDOWN:
+                if rect.rect.collidepoint(event.pos):
+                    moving = True
 
-                elif event.key == K_l:
-                    img = pygame.transform.laplacian(img)
+            elif event.type == MOUSEBUTTONUP:
+                moving = False
 
-                elif event.key == K_2:
-                    img = pygame.transform.scale2x(img)
-
-                rect = img.get_rect()
-                rect.center = center
-
-            elif event.type == MOUSEMOTION:
-                mouse = event.pos
-                x = mouse[0] - center[0]
-                y = mouse[1] - center[1]
-                d = math.sqrt(x ** 2 + y ** 2)
-
-                angle = math.degrees(-math.atan2(y, x))
-                scale = abs(5 * d / 800)
-                img = pygame.transform.rotozoom(img0, angle, scale)
-                rect = img.get_rect()
-                rect.center = center
-            pygame.draw.rect(img0, GREEN, rect0, 1)
-            screen.blit(img, rect)
-            pygame.draw.rect(screen, RED, rect, 1)
-            pygame.draw.circle(screen, RED, center, 6, 1)
-            pygame.draw.circle(screen, RED, mouse, 6, 1)
-            pygame.display.update()
-   
+            elif event.type == MOUSEMOTION and moving:
+                rect.rect.move_ip(event.rel)
+        
+        
+    for img in img_list:
+        screen.blit(img, rect)
+        pygame.draw.rect(screen, RED, rect, 1)
     
     for rect in rect_list:
         rect.draw()
+        print(rect.rect)
     
     if len(points)>1:
         rect = pygame.draw.lines(screen, POLYGON_COLOR, True, points, POLYGON_WIDTH)
