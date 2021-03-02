@@ -1,0 +1,9 @@
+A faire
+
+- Image : juste l'afficher plus régler taille (+ input nom fichier ?)
+
+- Ellipses (class Shape ? (= ajouter à rectangle variable forme, qui se modifie en même temps que le mode utilisé)
+
+- Mode déplacer 
+
+- Texte (?)
