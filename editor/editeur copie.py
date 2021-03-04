@@ -42,6 +42,12 @@ class Rectangle:
         
     def draw(self):
         pygame.draw.rect(screen, self.color, self.rect, self.width)
+        
+#     def moving():
+#         self.rect.move_ip(event.rel)
+#         
+#     def si_dessus():
+#         self.rect.collidepoint(event.pos)
 
 #polygone
 points = []
@@ -171,19 +177,18 @@ while running:
 ###########################################################################################################
         
         if forme == 'deplace':
-            print('moving mode')
             moving = False
             
             if event.type == MOUSEBUTTONDOWN:
-                if rect.rect.collidepoint(event.pos):
+                if rect.collidepoint(event.pos):
                     moving = True
 
             elif event.type == MOUSEBUTTONUP:
                 moving = False
 
             elif event.type == MOUSEMOTION and moving:
-                rect.rect.move_ip(event.rel)
-        
+                rect.move_ip(event.rel)
+    
         
     for img in img_list:
         screen.blit(img, rect)
@@ -191,7 +196,7 @@ while running:
     
     for rect in rect_list:
         rect.draw()
-        print(rect.rect)
+        
     
     if len(points)>1:
         rect = pygame.draw.lines(screen, POLYGON_COLOR, True, points, POLYGON_WIDTH)
