@@ -13,9 +13,25 @@ ScreenBackground = BLACK
 
 
 #key dict pour savoir quelle forme faire
-key_dict1 = {K_p:'rectangle', K_l:'ellipse', K_m:'polygone', K_n:'image', K_d:'deplace'}
 forme = 'rectangle'
+def init_forme(mode):
+    forme = mode
+    return forme
+key_dict1 = {K_p: 'rectangle', K_l: 'ellipse',
+             K_m: 'polygone', K_n: 'image'}
+             
+key_dict2 = {(K_p, KMOD_LMETA): init_forme('move rectangle'),
+             (K_l, KMOD_LMETA): init_forme('move ellipse'),
+             (K_m, KMOD_LMETA): init_forme('move polygone'),
+             (K_n, KMOD_LMETA): init_forme('move image'),
+             }
 
+def do_shortcut(event):
+    """Find the the key/mod combination in the dictionary and execute the cmd."""
+    k = event.key
+    m = event.mod
+    if (k, m) in key_dict2:
+        exec(key_dict1[k, m])
 #crée l'écran
 screen = pygame.display.set_mode([800, 600])
 
@@ -60,6 +76,9 @@ POLYGON_WIDTH = 2
 img_list = []
 
 
+#deplcer
+moving = False
+
 #boucle editeur
 running = True
 while running:
@@ -73,6 +92,11 @@ while running:
         if event.type == KEYDOWN:
             if event.key in key_dict1:
                 forme = key_dict1[event.key]
+                print(forme)
+        
+        if event.type == KEYDOWN:
+            forme = do_shortcut(event)
+            print(forme)
 
 ######################################################################################################
 
@@ -146,9 +170,9 @@ while running:
             path = os.path.join(path, 'bird.png')
             img = pygame.image.load('bird.png')
             img.convert()
-            rect = img.get_rect()
+            rect_img = img.get_rect()
             center = 800//2, 600//2
-            rect.center = center
+            #rect.center = center
             angle = 0
             scale = 1
             img_list.append(img)
@@ -176,23 +200,27 @@ while running:
     
 ###########################################################################################################
         
-        if forme == 'deplace':
-            moving = False
+        if forme == 'move image':
+            
             
             if event.type == MOUSEBUTTONDOWN:
-                if rect.collidepoint(event.pos):
+                if rect_img.collidepoint(event.pos):
+                    print('tes dessus')
                     moving = True
 
             elif event.type == MOUSEBUTTONUP:
+                print('tas lache')
                 moving = False
 
             elif event.type == MOUSEMOTION and moving:
-                rect.move_ip(event.rel)
+                print('ca bouge')
+                rect_img.move_ip(event.rel)
     
-        
+    if moving:
+        pygame.draw.rect(screen, BLUE, rect_img, 4)
+    
     for img in img_list:
-        screen.blit(img, rect)
-        pygame.draw.rect(screen, RED, rect, 1)
+        screen.blit(img, rect_img)
     
     for rect in rect_list:
         rect.draw()
