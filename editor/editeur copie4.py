@@ -63,6 +63,7 @@ class Images:
         self.center = (800/2, 600/2)
         self.scale = 1
         self.angle = 0
+        #self.load()
         
     def load(self):
         module = sys.modules['__main__']
@@ -72,6 +73,25 @@ class Images:
         self.image.convert()
         self.rect_img = self.image.get_rect()
         self.rect_img.center = self.center
+
+    def flip_h(self):
+        self.image = pygame.transform.flip(self.image, True, False)
+                    
+
+    def flip_v(self):
+        self.image = pygame.transform.flip(self.image, False, True)
+
+
+    def do_event(self, event):
+        if event.type == KEYDOWN:
+            if event.key == K_v:
+                self.flip_v()
+            elif event.key == K_h:
+                self.flip_h()
+                
+            elif event.key == K_l:
+                self.load()
+ 
         
 img_list = []
 
@@ -80,7 +100,7 @@ moving = False
 #boucle editeur
 running = True
 while running:
-    
+
     screen.fill(ScreenBackground)
     
     for event in pygame.event.get():
@@ -180,16 +200,16 @@ while running:
                 if event.key in key_dict_POLYGON_COLOR:
                     POLYGON_COLOR = key_dict_POLYGON_COLOR[event.key]
 
-            if len(points)>1:
-                rect = pygame.draw.lines(screen, POLYGON_COLOR, True, points, POLYGON_WIDTH)
-                pygame.draw.rect(screen, GREEN, rect, POLYGON_WIDTH)
+#             if len(points)>1:
+#                 rect = pygame.draw.lines(screen, POLYGON_COLOR, True, points, POLYGON_WIDTH)
+#                 pygame.draw.rect(screen, GREEN, rect, POLYGON_WIDTH)
 
 
     #####################################################################################################
         if forme == 'image':
             
             img = Images('bird.png')
-            img.load()
+        
             img_list.append(img)
             
             if event.type == KEYDOWN:
@@ -207,11 +227,7 @@ while running:
                         img.scale *= 1.1
                     img_list[-1].image = pygame.transform.rotozoom(img_list[-1].image, img.angle, img.scale)
                 
-                elif event.key == K_h:
-                    img_list[-1] = pygame.transform.flip(img_list[-1], True, False)
-                    
-                elif event.key == K_v:
-                    img_list[-1] = pygame.transform.flip(img_list[-1], False, True)
+            img_list[-1].do_event(event)
     
 ###########################################################################################################
         
@@ -268,7 +284,9 @@ while running:
 
             elif event.type == MOUSEMOTION and moving:
                 rect.move_ip(event.rel)
-        
+ 
+################################################################################# 
+ 
     for img in img_list:
         screen.blit(img.image, img.rect_img)
         pygame.draw.rect(screen, RED, img.rect_img, 1)
@@ -277,10 +295,10 @@ while running:
         rect.draw()
         
     
-#     if len(points)>1:
-#         rect = pygame.draw.lines(screen, POLYGON_COLOR, True, points, POLYGON_WIDTH)
-#         pygame.draw.rect(screen, GREEN, rect, POLYGON_WIDTH)
-#         pygame.display.update()
+    if len(points)>1:
+        rect = pygame.draw.lines(screen, POLYGON_COLOR, True, points, POLYGON_WIDTH)
+        pygame.draw.rect(screen, GREEN, rect, POLYGON_WIDTH)
+        
 
     pygame.display.update()
     

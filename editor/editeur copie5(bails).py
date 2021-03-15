@@ -14,7 +14,7 @@ ScreenBackground = BLACK
 
 
 #key dict pour savoir quelle forme faire
-key_dict1 = {K_p:'rectangle', K_l:'ellipse', K_d:'polygone', K_n:'image'}
+key_dict1 = {K_p:'rectangle', K_l:'ellipse', K_d:'polygone', K_n:'image', K_t:'texte'}
 forme = 'rectangle'
 
 #crée l'écran
