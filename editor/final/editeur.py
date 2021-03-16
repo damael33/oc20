@@ -2,9 +2,6 @@ from editeur_class import *
 
 pygame.init()
 
-
-img.load()
-img_list.append(img)
 #boucle editeur
 running = True
 while running:
@@ -23,7 +20,7 @@ while running:
                     
                 else:
                     forme = key_dict1[event.key]
-           
+        print(forme)  
         #dessine et édite les rectangles
         if forme == 'rectangle':
             if event.type == MOUSEBUTTONDOWN:
@@ -97,9 +94,19 @@ while running:
             if event.type == KEYDOWN:
                 if event.key in key_dict_POLYGON_COLOR:
                     POLYGON_COLOR = key_dict_POLYGON_COLOR[event.key]
-
+        #ajoute des images
+        if forme == 'charge':
+            nom = input('Nom fichier image : ')
+            nom = 'images/' + nom
+            img = Images(nom)
+            img.load()
+            img_list.append(img)
+            print(img_list)
+            forme = 'image'
+        
         #édite l'image
         if forme == 'image':
+            print(img_list)
             img_list[-1].do_event(event)
     
         #déplace l'image

@@ -53,11 +53,11 @@ class Images:
         self.image = pygame.transform.flip(self.image, False, True)
 
     def edit_angle(self):
-        self.image = pygame.transform.angle(self.image, img.angle)
+        self.image = pygame.transform.rotate(self.image, self.angle)
         self.rect_img = self.image.get_rect()
     
     def edit_scale(self):
-        self.image = pygame.transform.scale(self.image, img.scale)
+        self.image = pygame.transform.rotozoom(self.image, self.angle, self.scale)
         self.rect_img = self.image.get_rect()
         
     def do_event(self, event):
@@ -69,22 +69,21 @@ class Images:
  
             elif event.key == K_s:
                 if event.mod & KMOD_SHIFT:
-                    img.scale /= 1.1
+                    self.scale /= 1.1
                     self.edit_scale()
                 else:
-                    img.scale *= 1.1
+                    self.scale *= 1.1
                     self.edit_scale()
                     
             elif event.key == K_r:
                 if event.mod & KMOD_SHIFT:
-                    img.angle -= 10
+                    self.angle -= 10
                     self.edit_angle()
                 else:
-                    img.angle += 10
+                    self.angle += 10
                     self.edit_angle()
                     
 
 def Help():
     screen.blit(helpPNG, (0, 0))
     
-img = Images(nom_fichier)

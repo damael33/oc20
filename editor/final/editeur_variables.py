@@ -12,7 +12,7 @@ YELLOW = (255,255,100)
 ScreenBackground = BLACK
 
 #key dict pour savoir quelle forme faire
-key_dict1 = {K_p:'rectangle', K_l:'ellipse', K_d:'polygone', K_i:'image'}
+key_dict1 = {K_p:'rectangle', K_l:'ellipse', K_d:'polygone', K_i:'image', K_c:'charge'}
 forme = 'rectangle'
 
 #crée l'écran
