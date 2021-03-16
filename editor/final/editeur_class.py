@@ -53,13 +53,11 @@ class Images:
         self.image = pygame.transform.flip(self.image, False, True)
 
     def edit_angle(self):
-        print(self.angle, self.scale)
-        self.image = pygame.transform.rotozoom(self.image, img.angle, img.scale)
+        self.image = pygame.transform.angle(self.image, img.angle)
         self.rect_img = self.image.get_rect()
     
     def edit_scale(self):
-        print(self.angle, self.scale)
-        self.image = pygame.transform.rotozoom(self.image, img.angle, img.scale)
+        self.image = pygame.transform.scale(self.image, img.scale)
         self.rect_img = self.image.get_rect()
         
     def do_event(self, event):
