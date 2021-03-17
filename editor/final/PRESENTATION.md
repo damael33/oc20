@@ -56,7 +56,7 @@ empechant le mode déplacement de le redéplacer.
 Le problème est le même pour leur mode déplacement, qui est identique pour les 2. Dans ce cas, une erreur nous indique que le rectangle n'est pas défini.
 
 ### Dessiner plusieurs polygones
-Pour l'instant, il n'est possible de dessiner qu'un seul polygone, qu'il est de plus impossible à déplacer.
+Pour l'instant, il n'est possible de dessiner qu'un seul polygone, qui est de plus impossible à déplacer.
 
 ## Conclusion
 Notre éditeur, malgré quelques problèmes techniques, est fonctionnel. Il est bien entendu qu'il est possible de l'améliorer, en rajoutant par exemple 
