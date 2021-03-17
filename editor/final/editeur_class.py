@@ -54,11 +54,9 @@ class Images:
 
     def edit_angle(self):
         self.image = pygame.transform.rotate(self.image, self.angle)
-        self.rect_img = self.image.get_rect()
     
     def edit_scale(self):
         self.image = pygame.transform.rotozoom(self.image, self.angle, self.scale)
-        self.rect_img = self.image.get_rect()
         
     def do_event(self, event):
         if event.type == KEYDOWN:
@@ -71,17 +69,25 @@ class Images:
                 if event.mod & KMOD_SHIFT:
                     self.scale /= 1.1
                     self.edit_scale()
+                    self.rect_img = self.image.get_rect()
+                    self.rect_img.center = self.center
                 else:
                     self.scale *= 1.1
                     self.edit_scale()
-                    
+                    self.rect_img = self.image.get_rect()
+                    self.rect_img.center = self.center
+
             elif event.key == K_r:
                 if event.mod & KMOD_SHIFT:
                     self.angle -= 10
                     self.edit_angle()
+                    self.rect_img = self.image.get_rect()
+                    self.rect_img.center = self.center
                 else:
                     self.angle += 10
                     self.edit_angle()
+                    self.rect_img = self.image.get_rect()
+                    self.rect_img.center = self.center
                     
 
 def Help():

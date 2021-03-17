@@ -101,12 +101,10 @@ while running:
             img = Images(nom)
             img.load()
             img_list.append(img)
-            print(img_list)
             forme = 'image'
         
         #édite l'image
         if forme == 'image':
-            print(img_list)
             img_list[-1].do_event(event)
     
         #déplace l'image
