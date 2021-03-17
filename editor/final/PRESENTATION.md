@@ -12,7 +12,7 @@ Il est capable de travailler avec 4 types d'objets :
 - les polygones (touche D)
 - un mode déplacement permet, en appuyant sur la touche SHIFT + touche du type, de les déplacer
 - la touche A permet d'afficher l'aide aux commandes
-
+![help](images/help.png)
 ### Les rectangles et ellipses
 Ils sont dessinés à l'aide de la souris.
 Les recangles, ainsi que les ellipses, ont des paramètres éditables :
