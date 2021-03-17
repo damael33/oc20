@@ -29,7 +29,7 @@ Une fois à l'écran, il est possible :
 - de la tourner de plus ou moins 10 degrés (touche R ou SHIFT + R)
 - de l'agrandir ou la diminuer (respectivement S ou SHIFT + S)
 - de lui faire subir une symétrie d'axe vertical ou horizontal (touche V ou H)
-![img](Capture2.PNG)
+![img](images/Capture2.PNG)
 
 ### Les polygones
 Il est possible de dessiner un polygone, qui ont comme caractéristiques :
@@ -62,4 +62,5 @@ Pour l'instant, il n'est possible de dessiner qu'un seul polygone, qu'il est de 
 Notre éditeur, malgré quelques problèmes techniques, est fonctionnel. Il est bien entendu qu'il est possible de l'améliorer, en rajoutant par exemple 
 une fonctionnalité écrivant du texte, ou améliorer la présentation du code, en complétant les classes avec des méthodes, ainsi que résoudre les problèmes
 ennoncés.
+
 ![gag](images/téléchargement.jpg)
