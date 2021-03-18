@@ -99,7 +99,10 @@ while running:
             nom = input('Nom fichier image : ')
             nom = 'images/' + nom
             img = Images(nom)
-            img.load()
+            try:
+                img.load()
+            except FileNotFoundError:
+                print("Fichier non trouvé, relancez le programme.")
             img_list.append(img)
             forme = 'image'
         
@@ -159,8 +162,12 @@ while running:
  
     #affiche les formes
     for img in img_list:
-        screen.blit(img.image, img.rect_img)
-        pygame.draw.rect(screen, RED, img.rect_img, 1)
+        try:
+            screen.blit(img.image, img.rect_img)
+            pygame.draw.rect(screen, RED, img.rect_img, 1)
+        except TypeError:
+            print('ERREUR : Aucune image chargée. Relancer le programme.')
+            
     
     for rect in rect_list:
         rect.draw()
