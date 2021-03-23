@@ -60,8 +60,8 @@ Pour l'instant, il n'est possible de dessiner qu'un seul polygone, qui est de pl
 
 ## Conclusion
 Notre éditeur, malgré quelques problèmes techniques, est fonctionnel. Il est bien entendu qu'il est possible de l'améliorer, en rajoutant par exemple 
-une fonctionnalité écrivant du texte, ou améliorer la présentation du code, en complétant les classes avec des méthodes, ainsi que résoudre les problèmes
-ennoncés.
+une fonctionnalité écrivant du texte ou en modifiant le background, ou améliorer la présentation du code, en complétant les classes avec des méthodes,
+ainsi que résoudre les problèmes ennoncés.
 
 ![gag](images/téléchargement.jpg)
 
