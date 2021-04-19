@@ -75,5 +75,28 @@ class Pokemon:
          
 class Rattata(Pokemon):
     def __init__(self, name, pv, typp, xp, attaques):
-        Pokemon.__init__(self, name, pv, typp, xp, attaque)
+        Pokemon.__init__(self, name, pv, typp, xp, attaques)
 
+
+class Joueur:
+    def __init__(self, name, equipe, mort, argent, sac):
+        self.name = name
+        self.equipe = []
+        self.mort = []
+        self.argent = argent
+        self.sac = {}
+        
+class PNJCombat(Joueur):
+    def __init__(self, name, equipe, mort, argent, sac):
+        Joueur.__init__(self, name, equipe, mort, argent, sac)
+        
+        
+class PNJ:
+    def __init__(self, name, job):
+        self.name = name
+        self.job = job
+
+class Combat:
+    def __init__(self, joueur, adversaire):
+        self.joueur = joueur
+        self.adversaire = adversaire
