@@ -67,15 +67,12 @@ class Attaque:
             
 
 class Pokemon:
-    def __init__(self, name, pv, typp, xp, attaques):
+    def __init__(self, espece, name, pv, typp, xp, attaques):
+        self.espece = espece
         self.pv = pv
         self.typp = typp
         self.xp = xp
         self.attaques = attaques
-         
-class Rattata(Pokemon):
-    def __init__(self, name, pv, typp, xp, attaques):
-        Pokemon.__init__(self, name, pv, typp, xp, attaques)
 
 
 class Joueur:
