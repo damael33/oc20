@@ -79,13 +79,13 @@ class Joueur:
     def __init__(self, name, equipe, mort, argent, sac):
         self.name = name
         self.equipe = []
-        self.mort = []
+        self.ko = []
         self.argent = argent
         self.sac = {}
         
 class PNJCombat(Joueur):
-    def __init__(self, name, equipe, mort, argent, sac):
-        Joueur.__init__(self, name, equipe, mort, argent, sac)
+    def __init__(self, name, equipe, ko, argent, sac):
+        Joueur.__init__(self, name, equipe, ko, argent, sac)
         
         
 class PNJ:
