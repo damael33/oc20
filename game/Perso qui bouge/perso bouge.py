@@ -59,8 +59,10 @@ CENTER_HANDLE = 4
 
 index = 0
 i = 0
+
+running = True
 # main loop
-while True:
+while running:
     DS.blit(background, (0, 0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
