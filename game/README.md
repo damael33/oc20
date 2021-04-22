@@ -18,6 +18,7 @@ Pour la phase de combat il y'aura un choix entre quatre attaques disponibles afi
 
 Pour la phase de déplacement, le personnage sera déplaçable avec avec les flèches, et il pourra intéragir avec des élements de la map en appuyant sur la touche "a". Dans le but de rencontrer des pokémons sauvages, le joueur devra se déplacer dans des fourrés afin de faire progresser son pokemon ou alors d'en capturer de nouveaux. Il faudra néanmoins faire attention aux autres dresseurs qui vous barreront la route et qui voudront vous combattre !
 
+![Capture d’écran 2021-04-22 à 13 42 05](https://user-images.githubusercontent.com/77661971/115709310-5f463280-a371-11eb-8dcb-68ebccc7da8f.png)
 
 ### Stucture interne de notre jeu
 Notre jeu est principalement basé sur l'usage de classes. En effet c'est la méthode la plus simple pour créer rapidement et facilement un grand nombre de pokemons, de types , d'attaques et plus encore.
