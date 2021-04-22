@@ -22,7 +22,48 @@ Pour la phase de déplacement, le personnage sera déplaçable avec avec les fl�
 
 ### Stucture interne de notre jeu
 Notre jeu est principalement basé sur l'usage de classes. En effet c'est la méthode la plus simple pour créer rapidement et facilement un grand nombre de pokemons, de types , d'attaques et plus encore.
-![2021-04-21 19_15_08-Thonny  -  C__Users_matte_Desktop_OC20 Maxime_oc20_game_test_class py  @  99 _ 3](https://user-images.githubusercontent.com/77661971/115594376-f52c7f80-a2d5-11eb-9436-9a0a06ee56df.png)
+
+    class Attaque:       
+      def __init__(self, degat, typa, taux_critique):
+          self.degat = degat
+          self.typa = typa
+          self.taux_critique = taux_critique
+
+
+      def critique(self):
+          nbr_critique = []
+          while len(nbr_critique) < self.taux_critique:
+              nbr = random.randint(1, 100)
+              if nbr not in nbr_critique:
+                  nbr_critique.append(nbr)
+
+          if random.randint(1, 100) in nbr_critique:
+              print('Coup critique!')
+              return True
+
+      def attaquer(adversaire):
+          if affinites[liste_types.index(self.typa)][liste_types.index(adversaire.typp)] == '0':
+              print('C\'est inefficace !')
+
+          if affinites[liste_types.index(self.typa)][liste_types.index(adversaire.typp)] == 'd':
+              print('Ce n\'est pas très efficace...')
+              if self.critique():
+                  adversaire.pv -= self.degat
+              else:
+                  adversaire.pv -= self.degat / 2
+
+          if affinites[liste_types.index(self.typa)][liste_types.index(adversaire.typp)] == '2':
+              print('C\'est super efficace!')
+              if self.critique():
+                  adversaire.pv -= self.degat *4
+              else:
+                  adversaire.pv -= self.degat * 2
+
+          else:
+              if self.critique():
+                  adversaire.pv -= self.degat * 2
+              else:
+                  adversaire.pv -= self.degat
 
 Voici notamment un exemple de notre classe attaque. 
 
