@@ -23,7 +23,7 @@ Pour la phase de déplacement, le personnage sera déplaçable avec avec les fl�
 ### Stucture interne de notre jeu
 Notre jeu est principalement basé sur l'usage de classes. En effet c'est la méthode la plus simple pour créer rapidement et facilement un grand nombre de pokemons, de types , d'attaques et plus encore.
 
-  class Attaque:       
+    class Attaque:       
       def __init__(self, degat, typa, taux_critique):
           self.degat = degat
           self.typa = typa
