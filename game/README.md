@@ -82,6 +82,6 @@ Voici notamment un exemple de notre classe ``attaque``.
 
 Comme cité auparavant notre jeu contient de nombreuses classes que vous pouvez voir ci-dessous :
 
-![diagramclass](https://user-images.githubusercontent.com/77661971/115594923-99aec180-a2d6-11eb-92c5-4389971a0620.JPG)
+![diagramclass](img/Diagram Class.PNG)
 
 Bien entendu ces classes ainsi que leurs attributs et méthodes ne sont pas définitives : comme un grand nombre d'idées continue d'affluer, certaines classes pourront disparaître ou être créées, d'autres se compléter ou deux classes pourront converger pour qu'une classe hérite d'une autre. Nous ne somme qu'au début du projet, qui va sûrement encore évoluer.
