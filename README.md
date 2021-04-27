@@ -1,18 +1,11 @@
-![tree](img/tree.jpg)
-# Un bel arbre
-## La source d'oxygène
-* test
-* de
-* liste
-* à 
-* puce
+# Bienvenue sur mon Repository
 
-*en italique*
+## Que trouverez-vous ?
+Sur ce repository vous trouverez tous les fichiers :
+- codes
+- images
+- et autres
+en lien avec mon cours d'``informatique``.
 
-**en gras**
-
-_en italique_
-
-__en gras__
-
-https://pygame.readthedocs.io/en/latest/rect/rect.html
+Ce repository est organiser en différent fichier, que voici :
+- ``
