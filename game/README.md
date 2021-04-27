@@ -86,5 +86,6 @@ Comme cité auparavant notre jeu contient de nombreuses classes que vous pouvez 
 
 Voici quelques commentaires concernant ce diagramme :
 - tous les attributs concernants le sprite du joueur sont sous entendues dans la variable ``sprite variables``
-- les paramètres des méthodes ne sont pas précisés, car parfois nombreux. Seul le ``self`` apparait. Si non, il s'agit d
+- les paramètres des méthodes ne sont pas précisés, car parfois nombreux. Seul le ``self`` apparait. Si non, il s'agit d'une *staticmethod*
+
 Bien entendu ces classes ainsi que leurs attributs et méthodes ne sont pas définitives : comme un grand nombre d'idées continue d'affluer, certaines classes pourront disparaître ou être créées, d'autres se compléter ou deux classes pourront converger pour qu'une classe hérite d'une autre. Nous ne somme qu'au début du projet, qui va sûrement encore évoluer.
