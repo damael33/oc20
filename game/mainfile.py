@@ -12,10 +12,26 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         s.deplacer(event)
+
+    s.draw(DS, s.index % s.totalCellCount, s.playerX, s.playerY, CENTER_HANDLE)
+    s.playerX += s.playerX_change
+    s.playerY += s.playerY_change
+    
+    if pygame.key.get_pressed() [pygame.K_LEFT] == True:
+        i += 1
+        s.index = 4 + i % 4
         
-    s.draw(DS, index % s.totalCellCount, playerX, playerY, CENTER_HANDLE)
-    playerX += playerX_change
-    playerY += playerY_change
+    if pygame.key.get_pressed() [pygame.K_RIGHT] == True:
+        i += 1
+        s.index = 8 + i % 4
+
+    if pygame.key.get_pressed() [pygame.K_DOWN] == True:
+        i += 1
+        s.index = 0 + i % 4
+        
+    if pygame.key.get_pressed() [pygame.K_UP] == True:
+        i += 1
+        s.index = 12 + i % 4
     
     pygame.display.update()
     CLOCK.tick(FPS)

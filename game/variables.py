@@ -9,16 +9,7 @@ pygame.display.set_caption("pokemon")
 icon = pygame.image.load('pokeball.png')
 pygame.display.set_icon(icon)
 
-# define display surface            
-W, H = 1000, 1000
-HW, HH = W / 2, H / 2
-AREA = W * H
 
-#perso
-playerX =  W/2 - 32
-playerY = H/1.25
-playerX_change = 0
-playerY_change = 0
 
 # initialise display
 pygame.init()
@@ -31,10 +22,7 @@ BLACK = (0, 0, 0, 255)
 WHITE = (255, 255, 255, 255)
 
 s = Joueur("Bebel", "spritesheet.png", 4, 4)
-
 CENTER_HANDLE = 4
-
-index = 0
 i = 0
 #Affinité de types et liste des types
 affinites = ['            d0  d',

@@ -2,7 +2,9 @@ import random
 import pygame
 from pygame.locals import *
 
-
+W, H = 1000, 1000
+HW, HH = W / 2, H / 2
+AREA = W * H
 class Attaque:       
     def __init__(self, degat, typa, taux_critique):
         self.degat = degat
@@ -56,14 +58,14 @@ class Pokemon:
 
 
 class Joueur:
-    def __init__(self, name, filename, cols, rows, equipe=[], mort=[], argent=0, sac={}):
+    def __init__(self, name, filename, cols, rows):
         self.name = name
         self.sheet = pygame.image.load(filename).convert_alpha()
         
         self.cols = cols
         self.rows = rows
         self.totalCellCount = cols * rows
-        
+       
         self.rect = self.sheet.get_rect()
         w = self.cellWidth = int(self.rect.width / cols)
         h = self.cellHeight = int(self.rect.height / rows)
@@ -75,47 +77,60 @@ class Joueur:
             (0, -hh), (-hw, -hh), (-w, -hh),
             (0, -h), (-hw, -h), (-w, -h),])
         
+        self.playerX = W/2 - 32
+        self.playerY = H/1.25
+        self.playerX_change = 0
+        self.playerY_change = 0
+        self.equipe = []
+        self.mort = []
+        self.argent = 0
+        self.sac = {}
+        self.index = 0
+        
     def draw(self, surface, cellIndex, x, y, handle = 0):
         surface.blit(self.sheet, (x + self.handle[handle][0], y + self.handle[handle][1]), self.cells[cellIndex])
     
     def deplacer(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                playerX_change = -10
-       
+                self.playerX_change = -10
+                print('va a gauche')
             if event.key == pygame.K_RIGHT:
-                playerX_change = +10
+                self.playerX_change = +10
                 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                playerX_change = 0
+                self.playerX_change = 0
         
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
-                index = 4
+                self.index = 4
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_RIGHT:
-                index = 8
+                self.index = 8
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                playerY_change = -10
+                self.playerY_change = -10
        
             if event.key == pygame.K_DOWN:
-                playerY_change = +10
+                self.playerY_change = +10
                
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                playerY_change = 0
+                self.playerY_change = 0
         
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
-                index = 12
+                self.index = 12
         
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN:
-                index = 0    
-    
+                self.index = 0    
+
+
+        
+
 class PNJCombat(Joueur):
     def __init__(self, name, equipe, ko, argent, sac):
         Joueur.__init__(self, name, equipe, ko, argent, sac)
