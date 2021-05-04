@@ -21,7 +21,7 @@ FPS = 8
 BLACK = (0, 0, 0, 255)
 WHITE = (255, 255, 255, 255)
 
-s = Joueur("Bebel", "spritesheet.png", 4, 4)
+joueur = Joueur("Bebel", "spritesheet.png", 4, 4)
 CENTER_HANDLE = 4
 i = 0
 #Affinité de types et liste des types
