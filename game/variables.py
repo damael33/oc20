@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from classes import *
 #background
-background = pygame.image.load('background.jpg')
+background = pygame.image.load('parla2.png')
 
 #Titre et icone
 pygame.display.set_caption("pokemon")
@@ -23,7 +23,6 @@ WHITE = (255, 255, 255, 255)
 
 joueur = Joueur("Bebel", "spritesheet.png", 4, 4)
 CENTER_HANDLE = 4
-i = 0
 #Affinité de types et liste des types
 affinites = ['            d0  d',
              ' dd2 2     2d d 2',
