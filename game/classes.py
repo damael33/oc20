@@ -11,7 +11,6 @@ class Attaque:
         self.typa = typa
         self.taux_critique = taux_critique
 
-
     def critique(self):
         nbr_critique = []
         while len(nbr_critique) < self.taux_critique:
@@ -105,11 +104,12 @@ class Joueur:
         self.carré_whiteX = self.playerX
         self.carré_whiteY = self.playerY
    
+       
     def draw(self, surface, cellIndex, x, y, handle = 0):
         surface.blit(self.sheet, (x + self.handle[handle][0], y + self.handle[handle][1]), self.cells[cellIndex])
     
-    def deplacer(self, event):
-        if event.type == pygame.KEYDOWN:
+    def deplacer(self, event, mask):
+        if event.type == pygame.KEYDOWN and not collision(mask):
             if event.key == pygame.K_RIGHT:
                 self.playerX_change = -10
             if event.key == pygame.K_LEFT:
@@ -162,7 +162,10 @@ class Joueur:
             self.i += 1
             self.index = 12 + self.i % 4
         
-
+    
+    def collision(self, ):
+        
+        
 class PNJCombat(Joueur):
     def __init__(self, name, equipe, ko, argent, sac):
         Joueur.__init__(self, name, equipe, ko, argent, sac)
@@ -189,57 +192,66 @@ class Combat:
             self.pokemon_adverse = self.adversaire.equipe[0]
         else:
             self.pokemon_adverse = self.adversaire
-#     def combat(self):       
-#         if adversaire.lance_combat():
-#             self.etat = True
-#         blit le nouveau background
-#         while self.etat:
-#             action = 'attaquer'
-#             if action == 'attaquer':
-#                 self.pokemon_joueur.attaques[attaque choisie].attaquer(self.pokemon_adverse)
-#                 
-#             if action = 'utiliser objet':
-#                 objet = Item('pokeball', 'capture')
-#                 
-#                 if objet.utilite == 'capture' and isinstance(self.adversaire, Pokemon):
-#                     if objet.utilisation(self.pokemon_adverse):
-#                         self.joueur.equipe.append(self.pokemon_adverse)
-#                         self.pokemon_adverse.pv = 0
-#                         
-#                 if objet.utilite == 'soin':
-#                     self.pokemon_joueur.pv = self.pokemon_joueur.pvmax
-#             
-#             if action == 'changer':
-#                 self.changement(nombre choisis)
-#             
-#             if isinstance(self.adversaire, PNJCombat) and len(adversaire.equipe) = 0:
-#                 vainqueur = self.joueur
-#                 self.etat = False
-#             
-#             elif isinstance(self.adversaire, Pokemon) and self.pokemon_adverse.pv <= 0:
-#                 vainqueur = self.joueur
-#                 self.etat = False
-#             
-#             self.pokemon_adverse.attaques[random.randint(0, 3)].attaquer(self.pokemon_joueur)
-#             if self.pokemon_joueur.pv <= 0 and len(self.joueur.equipe) > 0:
-#                 self.joueur.ko.append(self.pokemon_joueur)
-#                 self.joueur.equipe.remove(self.pokemon_joueur)
-#                 self.changement(numero choisis)
-#                 
-#             elif len(self.joueur.equipe) = 0:
-#                 self.etat = False
-#                 vainqueur = self.adversaire
-#             
-#         if vainqueur == self.joueur:
-#             for pokemon in self.joueur.equipe:
-#                 pokemon.xp += 10
-#             if isinstance(self.adversaire, PNJCombat):
-#                 self.joueur.argent += self.adversaire.argent
-#         else:
-#             self.joueur.argent *= (19/20)
-# 
-#     def changement(self, nbr):
-#         self.pokemon_joueur = joueur.equipe[nbr]
+    def combat(self):       
+        if adversaire.lance_combat():
+            self.etat = True
+        #blit le nouveau background
+        while self.etat:
+            action = 'attaquer'
+            #en fonction d'ou on appuie, l'action change
+            if action == 'attaquer':
+                #blit image des attaques
+                for attaque in self.pokemon_joueur.attaques:
+                    attaque.img_attaque #à tel position
+                
+                #attaque choisie = en fonction de sur quelle attaque on clique
+                self.pokemon_joueur.attaques[attaque choisie].attaquer(self.pokemon_adverse)
+                
+            if action = 'utiliser objet':
+                #objet en fonction de sur lequel on clique
+                objet = Item('pokeball', 'capture')
+                
+                if objet.utilite == 'capture' and isinstance(self.adversaire, Pokemon):
+                    if objet.utilisation(self.pokemon_adverse):
+                        self.joueur.equipe.append(self.pokemon_adverse)
+                        self.pokemon_adverse.pv = 0
+                        
+                if objet.utilite == 'soin':
+                    self.pokemon_joueur.pv = self.pokemon_joueur.pvmax
+            
+            if action == 'changer':
+                #blit choix pokemon
+                #nombre choisi = pokemon sur lequel on clique
+                self.changement(nombre choisis)
+            
+            if isinstance(self.adversaire, PNJCombat) and len(adversaire.equipe) = 0:
+                vainqueur = self.joueur
+                self.etat = False
+            
+            elif isinstance(self.adversaire, Pokemon) and self.pokemon_adverse.pv <= 0:
+                vainqueur = self.joueur
+                self.etat = False
+            
+            self.pokemon_adverse.attaques[random.randint(0, 3)].attaquer(self.pokemon_joueur)
+            if self.pokemon_joueur.pv <= 0 and len(self.joueur.equipe) > 0:
+                self.joueur.ko.append(self.pokemon_joueur)
+                self.joueur.equipe.remove(self.pokemon_joueur)
+                self.changement(numero choisis)
+                
+            elif len(self.joueur.equipe) = 0:
+                self.etat = False
+                vainqueur = self.adversaire
+            
+        if vainqueur == self.joueur:
+            for pokemon in self.joueur.equipe:
+                pokemon.xp += 10
+            if isinstance(self.adversaire, PNJCombat):
+                self.joueur.argent += self.adversaire.argent
+        else:
+            self.joueur.argent *= (19/20)
+
+    def changement(self, nbr):
+        self.pokemon_joueur = joueur.equipe[nbr]
         
 class Item:
     def __init__(self, nom, utilite):
