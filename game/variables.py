@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from classes import *
 #background
-background = pygame.image.load('parla2.png')
+
 
 #Titre et icone
 pygame.display.set_caption("pokemon")
@@ -15,7 +15,7 @@ pygame.display.set_icon(icon)
 pygame.init()
 CLOCK = pygame.time.Clock()
 DS = pygame.display.set_mode((W, H))
-FPS = 8
+FPS = 80
 
 # define some colors
 BLACK = (0, 0, 0, 255)

@@ -169,7 +169,7 @@ class PNJCombat(Joueur):
     
 #     def lance_combat(self):
 #         if joueur dans ma zone:
-#             #return True
+#             return True
     
         
 class PNJ:
@@ -189,7 +189,7 @@ class Combat:
             self.pokemon_adverse = self.adversaire.equipe[0]
         else:
             self.pokemon_adverse = self.adversaire
-#    def combat(self):       
+#     def combat(self):       
 #         if adversaire.lance_combat():
 #             self.etat = True
 #         blit le nouveau background
@@ -201,20 +201,22 @@ class Combat:
 #             if action = 'utiliser objet':
 #                 objet = Item('pokeball', 'capture')
 #                 
-#                 if objet.utilite == 'capture' and isinstance(self.pokemon_adverse, Pokemon):
+#                 if objet.utilite == 'capture' and isinstance(self.adversaire, Pokemon):
 #                     if objet.utilisation(self.pokemon_adverse):
 #                         self.joueur.equipe.append(self.pokemon_adverse)
 #                         self.pokemon_adverse.pv = 0
 #                         
 #                 if objet.utilite == 'soin':
 #                     self.pokemon_joueur.pv = self.pokemon_joueur.pvmax
-#                     
+#             
+#             if action == 'changer':
+#                 self.changement(nombre choisis)
 #             
 #             if isinstance(self.adversaire, PNJCombat) and len(adversaire.equipe) = 0:
 #                 vainqueur = self.joueur
 #                 self.etat = False
 #             
-#             elif isinstance(self.adversaire, Pokemon) and self.pokemon_adverse.pv == 0:
+#             elif isinstance(self.adversaire, Pokemon) and self.pokemon_adverse.pv <= 0:
 #                 vainqueur = self.joueur
 #                 self.etat = False
 #             
