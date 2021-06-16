@@ -198,18 +198,18 @@ class Combat:
     def combat(self):       
         if adversaire.lance_combat():
             self.etat = True
-        combat_template = pygame.image.load('img/Combat_template.png')
+        combat_template = pygame.image.load('img/Combat_template.png').convert_alpha()
         
-        combat_attaque = pygame.image.load('img/Combat_mask(attaque).png')
+        combat_attaque = pygame.image.load('img/Combat_mask(attaque).png').convert_alpha()
         combat_attaque_mask = pygame.mask.from_surface(combat_attaque)
 
-        combat_bag = pygame.image.load('img/Combat_mask(bag).png')
+        combat_bag = pygame.image.load('img/Combat_mask(bag).png').convert_alpha()
         combat_bag_mask = pygame.mask.from_surface(combat_bag)
         
-        combat_pokemon = pygame.image.load('img/Combat_mask(pokemon).png')
+        combat_pokemon = pygame.image.load('img/Combat_mask(pokemon).png').convert_alpha()
         combat_pokemon_mask = pygame.mask.from_surface(combat_pokemon)
         
-        combat_run = pygame.image.load('img/Combat_mask(pokemon).png')
+        combat_run = pygame.image.load('img/Combat_mask(pokemon).png').convert_alpha()
         combat_run_mask = pygame.mask.from_surface(combat_run)
 
         DS.blit(combat_attaque, (0, 0))
@@ -219,7 +219,7 @@ class Combat:
         DS.blit(combat_template, (0, 0))
         
         mx, my = pygame.mouse.get_pos()
-        combat_souris = pygame.image.load('img/souris.png')
+        combat_souris = pygame.image.load('img/souris.png').convert_alpha()
         combat_souris_mask = pygame.mask.from_surface(combat_souris)
         DS.blit(combat_souris,(mx, my))
         
@@ -235,21 +235,50 @@ class Combat:
         offset4 = (int(mx - 0), int(my - 0))
         result4 = combat_run_mask.overlap(combat_souris_mask, offset4)
         
-        if result1 = True, and jhyxcjkh:
+        if result1 = True and pygame.mouse.get_pressed():
             action = 'attaquer'
             
-        if result2 = True, and jhyxcjkh:
+        if result2 = True and pygame.mouse.get_pressed():
             action = 'utiliser objet'
             
-        if result3 = True, and jhyxcjkh:
+        if result3 = True and pygame.mouse.get_pressed():
             action = 'changer'
             
-        if result4 = True, and jhyxcjkh:
+        if result4 = True and pygame.mouse.get_pressed():
             action = 'run'
         
         #blit le nouveau background
         while self.etat:
-            action = 'attaquer'
+            mx, my = pygame.mouse.get_pos()
+            combat_souris = pygame.image.load('img/souris.png').convert_alpha()
+            combat_souris_mask = pygame.mask.from_surface(combat_souris)
+            DS.blit(combat_souris,(mx, my))
+            
+            offset1 = (int(mx - 0), int(my - 0))
+            result1 = combat_attaque_mask.overlap(combat_souris_mask, offset1)
+            
+            offset2 = (int(mx - 0), int(my - 0))
+            result2 = combat_bag_mask.overlap(combat_souris_mask, offset2)
+            
+            offset3 = (int(mx - 0), int(my - 0))
+            result3 = combat_pokemon_mask.overlap(combat_souris_mask, offset3)
+            
+            offset4 = (int(mx - 0), int(my - 0))
+            result4 = combat_run_mask.overlap(combat_souris_mask, offset4)
+            
+            if result1 and pygame.mouse.get_pressed():
+                action = 'attaquer'
+                
+            if result2 = True and pygame.mouse.get_pressed():
+                action = 'utiliser objet'
+                
+            if result3 = True and pygame.mouse.get_pressed():
+                action = 'changer'
+                
+            if result4 = True and pygame.mouse.get_pressed():
+                action = 'run'
+                
+                
             #en fonction d'ou on appuie, l'action change
             if action == 'attaquer':
                 #blit image des attaques
