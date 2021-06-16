@@ -6,6 +6,28 @@ W, H = 1000, 1000
 HW, HH = W / 2, H / 2
 AREA = W * H
 DS = pygame.display.set_mode((W, H))
+affinites = ['            d0  d',
+             ' dd2 2     2d d 2',
+             ' 2dd    2   2 d  ',
+             ' d2d   d2d d2 d d',
+             '  2dd   02    d  ',
+             ' dd 2 d  22   2 d',
+             '2    2 d ddd20 22',
+             '   2   dd   dd  0',
+             ' 2 d2  2 0 d2   2',
+             '   2d 2    2d   d',
+             '      22  d    0d',
+             ' d 2  dd d2  d 2d',
+             ' 2   2d d2 2    d',
+             '0         2  2 dd',
+             '              2 d',
+             '      d   2  2 dd',
+             ' dd  2      2   d']
+
+liste_types = ['Normal', 'Feu', 'Eau', 'Plante', 'Electrik',
+               'Glace', 'Combat', 'Poison', 'Sol', 'Vol',
+               'Psy', 'Insecte', 'Roche', 'Spectre', 'Dragon',
+               'Ténèbres', 'Acier']
 class Attaque:       
     def __init__(self, name, degat, typa, taux_critique, image_path):
         self.name = name
@@ -26,7 +48,7 @@ class Attaque:
             print('Coup critique!')
             return True
     
-    def attaquer(adversaire):
+    def attaquer(self, adversaire):
         if affinites[liste_types.index(self.typa)][liste_types.index(adversaire.typp)] == '0':
             print('C\'est inefficace !')
         
@@ -169,9 +191,6 @@ class Joueur:
             self.i += 1
             self.index = 12 + self.i % 4
         
-    
-#     def collision(self, ):
-        
         
 class PNJCombat(Joueur):
     def __init__(self, name, equipe, ko, argent, sac):
@@ -180,12 +199,6 @@ class PNJCombat(Joueur):
 #     def lance_combat(self):
 #         if joueur dans ma zone:
 #             return True
-    
-        
-class PNJ:
-    def __init__(self, name, job):
-        self.name = name
-        self.job = job
 
 
 
@@ -223,38 +236,9 @@ class Combat:
         DS.blit(combat_template, (0, 0))
         DS.blit(self.pokemon_adverse.image, (0, 0))
         DS.blit(self.pokemon_joueur.image,(0, 0))
-        
-        mx, my = pygame.mouse.get_pos()
-        combat_souris = pygame.image.load('Combat pokemon/souris.png').convert_alpha()
-        combat_souris_mask = pygame.mask.from_surface(combat_souris)
-        DS.blit(combat_souris,(mx, my))
-        
-        offset1 = (int(mx - 0), int(my - 0))
-        result1 = combat_attaque_mask.overlap(combat_souris_mask, offset1)
-        
-        offset2 = (int(mx - 0), int(my - 0))
-        result2 = combat_bag_mask.overlap(combat_souris_mask, offset2)
-        
-        offset3 = (int(mx - 0), int(my - 0))
-        result3 = combat_pokemon_mask.overlap(combat_souris_mask, offset3)
-        
-        offset4 = (int(mx - 0), int(my - 0))
-        result4 = combat_run_mask.overlap(combat_souris_mask, offset4)
-        
-        if result1 and pygame.mouse.get_pressed():
-            action = 'attaquer'
-            
-        if result2 and pygame.mouse.get_pressed():
-            action = 'utiliser objet'
-            
-        if result3 and pygame.mouse.get_pressed():
-            action = 'changer'
-            
-        if result4 and pygame.mouse.get_pressed():
-            action = 'run'
-        
-        #blit le nouveau background
+        pygame.display.update()
         while self.etat:
+            
             mx, my = pygame.mouse.get_pos()
             combat_souris = pygame.image.load('Combat pokemon/souris.png').convert_alpha()
             combat_souris_mask = pygame.mask.from_surface(combat_souris)
@@ -273,128 +257,129 @@ class Combat:
             result4 = combat_run_mask.overlap(combat_souris_mask, offset4)
             
             action = ''
-            
-            if result1 and pygame.mouse.get_pressed():
-                action = 'attaquer'
-                
-            if result2 and pygame.mouse.get_pressed():
-                action = 'utiliser objet'
-                
-            if result3 and pygame.mouse.get_pressed():
-                action = 'changer'
-                
-            if result4 and pygame.mouse.get_pressed():
-                action = 'run'
-                
-                
-            #en fonction d'ou on appuie, l'action change
-            if action == 'attaquer':
-                combat_menu_attaques = pygame.image.load('img/Combat_attaques_bag.png').convert_alpha()
-                DS.blit(combat_menu_attaques, (0, 0))
-                attaque_pos = [(159, 562), (505, 562), (159, 733), (506, 734)]  
-                i = 0
-                for attaque in self.pokemon_joueur.attaques:
-                    DS.blit(attaque.image, attaque_pos[i])
-                    i+=1
-                
-                offset5 = (int(mx - 159), int(my - 562))
-                result5 = self.pokemon_joueur.attaques[0].mask_image.overlap(combat_souris_mask, offset5)
-                
-                offset6 = (int(mx - 505), int(my - 562))
-                result6 = self.pokemon_joueur.attaques[1].mask_image.overlap(combat_souris_mask, offset6)
-                
-                offset7 = (int(mx - 159), int(my - 733))
-                result7 = self.pokemon_joueur.attaques[2].mask_image.overlap(combat_souris_mask, offset7)
-                
-                offset8 = (int(mx - 506), int(my - 734))
-                result8 = self.pokemon_joueur.attaques[3].mask_image.overlap(combat_souris_mask, offset8)
-                
-                if result5 and pygame.mouse.get_pressed():
-                    attaque_choisie = 0
-                
-                if result6 and pygame.mouse.get_pressed():
-                    attaque_choisie = 1
+            print(action)
+            while action == '':
+                if result1 and pygame.mouse.get_pressed()[0]:
+                    action = 'attaquer'
                     
-                if result7 and pygame.mouse.get_pressed():
-                    attaque_choisie = 2
+                if result2 and pygame.mouse.get_pressed()[0]:
+                    action = 'utiliser objet'
                     
-                if result8 and pygame.mouse.get_pressed():
-                    attaque_choisie = 3
+                if result3 and pygame.mouse.get_pressed()[0]:
+                    action = 'changer'
+                    
+                if result4 and pygame.mouse.get_pressed()[0]:
+                    action = 'run'
+                
+                print(action)
+                #en fonction d'ou on appuie, l'action change
+                if action == 'attaquer':
+                    combat_menu_attaques = pygame.image.load('Combat pokemon/Combat_attaques_bag.png').convert_alpha()
+                    DS.blit(combat_menu_attaques, (0, 0))
+                    attaque_pos = [(159, 562), (505, 562), (159, 733), (506, 734)]  
+                    i = 0
+                    for attaque in self.pokemon_joueur.attaques:
+                        DS.blit(attaque.image, attaque_pos[i])
+                        i+=1
+                    
+                    offset5 = (int(mx - 159), int(my - 562))
+                    result5 = self.pokemon_joueur.attaques[0].mask_image.overlap(combat_souris_mask, offset5)
+                    
+                    offset6 = (int(mx - 505), int(my - 562))
+                    result6 = self.pokemon_joueur.attaques[1].mask_image.overlap(combat_souris_mask, offset6)
+                    
+                    offset7 = (int(mx - 159), int(my - 733))
+                    result7 = self.pokemon_joueur.attaques[2].mask_image.overlap(combat_souris_mask, offset7)
+                    
+                    offset8 = (int(mx - 506), int(my - 734))
+                    result8 = self.pokemon_joueur.attaques[3].mask_image.overlap(combat_souris_mask, offset8)
+                    
+                    if result5 and pygame.mouse.get_pressed()[0]:
+                        attaque_choisie = 0
+                    
+                    if result6 and pygame.mouse.get_pressed()[0]:
+                        attaque_choisie = 1
                         
-                #attaque choisie = en fonction de sur quelle attaque on clique
-                self.pokemon_joueur.attaques[attaque_choisie].attaquer(self.pokemon_adverse)
-                
-            if action == 'utiliser objet':
-                combat_menu_objets = pygame.image.load('img/Combat_attaques_bag.png').convert_alpha()
-                DS.blit(combat_menu_objets, (0, 0))
-                
-                combat_pokeball = pygame.image.load('img/bag/bag_pokeball.png').convert_alpha()
-                combat_pokeball_mask = pygame.mask.from_surface(combat_pokeball)
-                DS.blit(combat_pokeball, (159, 562))
-                
-                combat_potion = pygame.image.load('img/bag/bag_potion.png').convert_alpha()
-                combat_potion_mask = pygame.mask.from_surface(combat_potion)
-                DS.blit(combat_potion, (505, 562))                
-                
-                offset9 = (int(mx - 159), int(my - 562))
-                result9 = combat_pokeball_mask.overlap(combat_souris_mask, offset5)
-                
-                offset10 = (int(mx - 505), int(my - 562))
-                result10 = combat_potion_mask.overlap(combat_souris_mask, offset5)
-                
-                objet = ''
-                
-                if result9 and pygame.mouse.get_pressed():
+                    if result7 and pygame.mouse.get_pressed()[0]:
+                        attaque_choisie = 2
+                        
+                    if result8 and pygame.mouse.get_pressed()[0]:
+                        attaque_choisie = 3
+                            
+                    #attaque choisie = en fonction de sur quelle attaque on clique
+                    self.pokemon_joueur.attaques[attaque_choisie].attaquer(self.pokemon_adverse)
+                    
+                if action == 'utiliser objet':
+                    combat_menu_objets = pygame.image.load('Combat pokemon/Combat_attaques_bag.png').convert_alpha()
+                    DS.blit(combat_menu_objets, (0, 0))
+                    
+                    combat_pokeball = pygame.image.load('Combat pokemon/bag/bag_pokeball.png').convert_alpha()
+                    combat_pokeball_mask = pygame.mask.from_surface(combat_pokeball)
+                    DS.blit(combat_pokeball, (159, 562))
+                    
+                    combat_potion = pygame.image.load('Combat pokemon/bag/bag_potion.png').convert_alpha()
+                    combat_potion_mask = pygame.mask.from_surface(combat_potion)
+                    DS.blit(combat_potion, (505, 562))                
+                    
+                    offset9 = (int(mx - 159), int(my - 562))
+                    result9 = combat_pokeball_mask.overlap(combat_souris_mask, offset5)
+                    
+                    offset10 = (int(mx - 505), int(my - 562))
+                    result10 = combat_potion_mask.overlap(combat_souris_mask, offset5)
+                    
+                    objet = ''
+                    
+                    if result9 and pygame.mouse.get_pressed()[0]:
+                        objet = Item('pokeball', 'capture')
+                    
+                    if result10 and pygame.mouse.get_pressed()[0]:
+                        objet = Item('potion', 'soin')
+                    
+                    #objet en fonction de sur lequel on clique
                     objet = Item('pokeball', 'capture')
+                    
+                    if objet.utilite == 'capture' and isinstance(self.adversaire, Pokemon):
+                        if objet.utilisation(self.pokemon_adverse):
+                            self.joueur.equipe.append(self.pokemon_adverse)
+                            self.pokemon_adverse.pv = 0
+                            
+                    if objet.utilite == 'soin':
+                        self.pokemon_joueur.pv = self.pokemon_joueur.pvmax
                 
-                if result10 and pygame.mouse.get_pressed():
-                    objet = Item('potion', 'soin')
-                
-                #objet en fonction de sur lequel on clique
-                objet = Item('pokeball', 'capture')
-                
-                if objet.utilite == 'capture' and isinstance(self.adversaire, Pokemon):
-                    if objet.utilisation(self.pokemon_adverse):
-                        self.joueur.equipe.append(self.pokemon_adverse)
-                        self.pokemon_adverse.pv = 0
+                if action == 'changer':
+                    combat_menu_pokemon = pygame.image.load('Combat pokemon/Combat_attaques_bag.png').convert_alpha()
+                    DS.blit(combat_menu_pokemon, (0, 0))
+                    pokemon_pos = [(159, 562), (505, 562), (159, 733), (506, 734)]
+                    i = 0
+                    for pokemon in self.joueur.equipe:
+                        DS.blit(attaque.image, pokemon_pos[i])
+                        i+=1
+                    
+                    offset11 = (int(mx - 159), int(my - 562))
+                    result11 = self.joueur.equipe[0].mask_image.overlap(combat_souris_mask, offset11)
+                    
+                    offset12 = (int(mx - 505), int(my - 562))
+                    result12 = self.joueur.equipe[1].mask_image.overlap(combat_souris_mask, offset12)
+                    
+                    offset13 = (int(mx - 159), int(my - 733))
+                    result13 = self.joueur.equipe[2].mask_image.overlap(combat_souris_mask, offset13)
+                    
+                    offset14 = (int(mx - 506), int(my - 734))
+                    result14 = self.joueur.equipe[3].mask_image.overlap(combat_souris_mask, offset14)
+                    
+                    if result11 and pygame.mouse.get_pressed()[0]:
+                        pokemon_choisi = 0
+                    
+                    if result12 and pygame.mouse.get_pressed()[0]:
+                        pokemon_choisi = 1
                         
-                if objet.utilite == 'soin':
-                    self.pokemon_joueur.pv = self.pokemon_joueur.pvmax
-            
-            if action == 'changer':
-                combat_menu_pokemon = pygame.image.load('img/Combat_attaques_bag.png').convert_alpha()
-                DS.blit(combat_menu_pokemon, (0, 0))
-                pokemon_pos = [(159, 562), (505, 562), (159, 733), (506, 734)]
-                i = 0
-                for pokemon in self.joueur.equipe:
-                    DS.blit(attaque.image, pokemon_pos[i])
-                    i+=1
-                
-                offset11 = (int(mx - 159), int(my - 562))
-                result11 = self.joueur.equipe[0].mask_image.overlap(combat_souris_mask, offset11)
-                
-                offset12 = (int(mx - 505), int(my - 562))
-                result12 = self.joueur.equipe[1].mask_image.overlap(combat_souris_mask, offset12)
-                
-                offset13 = (int(mx - 159), int(my - 733))
-                result13 = self.joueur.equipe[2].mask_image.overlap(combat_souris_mask, offset13)
-                
-                offset14 = (int(mx - 506), int(my - 734))
-                result14 = self.joueur.equipe[3].mask_image.overlap(combat_souris_mask, offset14)
-                
-                if result11 and pygame.mouse.get_pressed():
-                    pokemon_choisi = 0
-                
-                if result12 and pygame.mouse.get_pressed():
-                    pokemon_choisi = 1
-                    
-                if result13 and pygame.mouse.get_pressed():
-                    pokemon_choisi = 2
-                    
-                if result14 and pygame.mouse.get_pressed():
-                    pokemon_choisi = 3
-                    
-                self.changement(pokemon_choisi)
+                    if result13 and pygame.mouse.get_pressed()[0]:
+                        pokemon_choisi = 2
+                        
+                    if result14 and pygame.mouse.get_pressed()[0]:
+                        pokemon_choisi = 3
+                        
+                    self.changement(pokemon_choisi)
             
             if isinstance(self.adversaire, PNJCombat) and len(adversaire.equipe) == 0:
                 vainqueur = self.joueur
@@ -403,12 +388,12 @@ class Combat:
             elif isinstance(self.adversaire, Pokemon) and self.pokemon_adverse.pv <= 0:
                 vainqueur = self.joueur
                 self.etat = False
-            print(self.pokemon_joueur)
+                
             self.pokemon_adverse.attaques[0].attaquer(self.pokemon_joueur)
             if self.pokemon_joueur.pv <= 0 and len(self.joueur.equipe) > 0:
-                self.joueur.ko.append(self.pokemon_joueur)
+                self.joueur.mort.append(self.pokemon_joueur)
                 self.joueur.equipe.remove(self.pokemon_joueur)
-                combat_menu_pokemon = pygame.image.load('img/Combat_attaques_bag.png').convert_alpha()
+                combat_menu_pokemon = pygame.image.load('Combat pokemon/Combat_attaques_bag.png').convert_alpha()
                 DS.blit(combat_menu_pokemon, (0, 0))
                 pokemon_pos = [(159, 562), (505, 562), (159, 733), (506, 734)]
                 i = 0
@@ -428,16 +413,16 @@ class Combat:
                 offset14 = (int(mx - 506), int(my - 734))
                 result14 = self.joueur.equipe[3].mask_image.overlap(combat_souris_mask, offset14)
                 
-                if result11 and pygame.mouse.get_pressed():
+                if result11 and pygame.mouse.get_pressed()[0]:
                     pokemon_choisi = 0
                 
-                if result12 and pygame.mouse.get_pressed():
+                if result12 and pygame.mouse.get_pressed()[0]:
                     pokemon_choisi = 1
                     
-                if result13 and pygame.mouse.get_pressed():
+                if result13 and pygame.mouse.get_pressed()[0]:
                     pokemon_choisi = 2
                     
-                if result14 and pygame.mouse.get_pressed():
+                if result14 and pygame.mouse.get_pressed()[0]:
                     pokemon_choisi = 3
                     
                 self.changement(pokemon_choisi)
@@ -469,3 +454,28 @@ class Item:
         if self.utilite == 'capture':
             beneficiaire.capturer()
         
+class Obstacle:
+    def __init__(self, filename, posX, posY):
+        self.filename = filename
+        self.mask = pygame.mask.from_surface(pygame.image.load(self.filename).convert_alpha())
+        self.x = posX
+        self.y = posY
+        
+    def collision(self, joueur):
+        offset = (int(481 - self.x), int(480 - self.y))
+        result = self.mask.overlap(joueur.carré_white_mask, offset)
+        if result:
+            if joueur.playerX_change > 0:
+                joueur.playerX_change = 0
+                joueur.playerX -= 10
+            if joueur.playerX_change < 0:
+                joueur.playerX_change = 0
+                joueur.playerX += 10
+            if joueur.playerY_change > 0:
+                joueur.playerY_change = 0
+                joueur.playerY -= 10
+            if joueur.playerY_change < 0:
+                joueur.playerY_change = 0
+                joueur.playerY += 10
+        else:
+            pass
