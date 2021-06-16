@@ -14,6 +14,7 @@ while running:
     
     joueur.marcher()
     
+
     DS.blit(pygame.image.load('img/map finale(buissons).png'), (joueur.playerX, joueur.playerY))
     DS.blit(pygame.image.load('img/map finale(map obstacles).png'), (joueur.playerX, joueur.playerY))
     DS.blit(pygame.image.load('img/map finale(map portes).png'), (joueur.playerX, joueur.playerY))
@@ -23,5 +24,7 @@ while running:
     joueur.playerX += joueur.playerX_change
     joueur.playerY += joueur.playerY_change  
     pygame.display.update()
+    test = Combat(joueur, advers)
+    test.combat()
     CLOCK.tick(FPS)
     DS.fill(BLACK)
