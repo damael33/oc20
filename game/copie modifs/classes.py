@@ -329,11 +329,11 @@ class Combat:
                 combat_menu_objets = pygame.image.load('img/Combat_attaques_bag.png').convert_alpha()
                 DS.blit(combat_menu_objets, (0, 0))
                 
-                combat_pokeball = pygame.image.load('img/bag_pokeball.png').convert_alpha()
+                combat_pokeball = pygame.image.load('img/bag/bag_pokeball.png').convert_alpha()
                 combat_pokeball_mask = pygame.mask.from_surface(combat_pokeball)
                 DS.blit(combat_pokeball, (159, 562))
                 
-                combat_potion = pygame.image.load('img/bag_potion.png').convert_alpha()
+                combat_potion = pygame.image.load('img/bag/bag_potion.png').convert_alpha()
                 combat_potion_mask = pygame.mask.from_surface(combat_potion)
                 DS.blit(combat_potion, (505, 562))                
                 
