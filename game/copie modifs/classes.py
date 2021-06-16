@@ -477,3 +477,4 @@ class Sprite:
     def __init__(self, nom, position):
         self.nom = nom
         self.position = position
+        
