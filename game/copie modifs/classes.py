@@ -269,22 +269,51 @@ class Combat:
             if result1 and pygame.mouse.get_pressed():
                 action = 'attaquer'
                 
-            if result2 = True and pygame.mouse.get_pressed():
+            if result2 and pygame.mouse.get_pressed():
                 action = 'utiliser objet'
                 
-            if result3 = True and pygame.mouse.get_pressed():
+            if result3 and pygame.mouse.get_pressed():
                 action = 'changer'
                 
-            if result4 = True and pygame.mouse.get_pressed():
+            if result4 and pygame.mouse.get_pressed():
                 action = 'run'
                 
                 
             #en fonction d'ou on appuie, l'action change
             if action == 'attaquer':
-                #blit image des attaques
+                combat_menu_attaques = pygame.image.load('img/Combat_attaques_bag.png').convert_alpha()
+                DS.blit(combat_menu_attaques, (0, 0))
+                attaque_pos = [(159, 562), (505, 562), (159, 733), (506, 734)]  
+                i = 0
                 for attaque in self.pokemon_joueur.attaques:
-                    attaque.img_attaque #à tel position
+                    DS.blit(attaque.image, attaque_pos[i])
+                    i+=1
                 
+                offset5 = (int(mx - 159), int(my - 562))
+                result5 = self.pokemon_joueur.attaques[0].mask_image.overlap(combat_souris_mask, offset5)
+                
+                offset6 = (int(mx - 505), int(my - 562))
+                result6 = self.pokemon_joueur.attaques[1].mask_image.overlap(combat_souris_mask, offset6)
+                
+                offset7 = (int(mx - 159), int(my - 733))
+                result7 = self.pokemon_joueur.attaques[2].mask_image.overlap(combat_souris_mask, offset7)
+                
+                offset8 = (int(mx - 506), int(my - 734))
+                result8 = self.pokemon_joueur.attaques[3].mask_image.overlap(combat_souris_mask, offset8)
+                
+                if result1 and pygame.mouse.get_pressed():
+                    action = 'attaquer'
+                
+                if result2 and pygame.mouse.get_pressed():
+                    action = 'utiliser objet'
+                    
+                if result3 and pygame.mouse.get_pressed():
+                    action = 'changer'
+                    
+                if result4 and pygame.mouse.get_pressed():
+                    action = 'run'
+                    
+                    
                 #attaque choisie = en fonction de sur quelle attaque on clique
                 self.pokemon_joueur.attaques[attaque choisie].attaquer(self.pokemon_adverse)
                 
