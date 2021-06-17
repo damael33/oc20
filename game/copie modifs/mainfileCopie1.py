@@ -36,8 +36,8 @@ while running:
     pnj.lance_combat(joueur)
     advers.lance_combat(joueur)
 
-    test = Combat(joueur, advers)
-    test.combat()
+#     test = Combat(joueur, advers)
+#     test.combat()
 
     pygame.display.update()
     CLOCK.tick(FPS)
