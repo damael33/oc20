@@ -21,10 +21,10 @@ BLACK = (0, 0, 0, 255)
 WHITE = (255, 255, 255, 255)
 
 joueur = Joueur("Bebel", "spritesheet.png", 4, 4)
-joueur.equipe = [Pokemon('salameche', 'Feu', 0, [Attaque('boule feu', 5, 'Feu', 20, 'Combat pokemon/attaques/brasier.png'), Attaque('boule feu', 5, 'Feu', 20, 'Combat pokemon/attaques/brasier.png'), Attaque('boule feu', 5, 'Feu', 20, 'Combat pokemon/attaques/brasier.png'), Attaque('boule feu', 5, 'Feu', 20, 'Combat pokemon/attaques/brasier.png')], 'Combat pokemon/souris.png', 'Combat pokemon/sprites pokemon/salamèche/salamèche_allié.png', 'Combat pokemon/changement pokemon/changement_pokemon_salameche.png', 0, 0)]
+joueur.equipe = [Pokemon('salameche', 'Feu', 0, [Attaque('boule feu', 100, 'Plante', 20, 'Combat pokemon/attaques/brasier.png'), Attaque('boule feu', 5, 'Feu', 20, 'Combat pokemon/attaques/brasier.png'), Attaque('boule feu', 5, 'Feu', 20, 'Combat pokemon/attaques/brasier.png'), Attaque('boule feu', 5, 'Feu', 20, 'Combat pokemon/attaques/brasier.png')], 'Combat pokemon/souris.png', 'Combat pokemon/sprites pokemon/salamèche/salamèche_allié.png', 'Combat pokemon/changement pokemon/changement_pokemon_salameche.png', 0, 0)]
 
 advers = Pokemon('bublizare', 'Plante', 0,
-                 [Attaque('jet', 5, 'Eau', 30, 'Combat pokemon/potion.png')], 'Combat pokemon/souris.png', 'Combat pokemon/sprites pokemon/bulbizare/bulbisare_ennemi.png', 'Combat pokemon/changement pokemon/changement_pokemon_bulbizare.png',
+                 [Attaque('jet', 5, 'Plante', 30, 'Combat pokemon/potion.png')], 'Combat pokemon/souris.png', 'Combat pokemon/sprites pokemon/bulbizare/bulbisare_ennemi.png', 'Combat pokemon/changement pokemon/changement_pokemon_bulbizare.png',
                  -200, 800)
 
 pnj = PNJCombat('Bob', [Pokemon('bublizare', 'Plante', 0, [Attaque('jet', 5, 'Eau', 30, 'Combat pokemon/potion.png')], 'Combat pokemon/souris.png', 'Combat pokemon/sprites pokemon/bulbizare/bulbisare_ennemi.png', 'Combat pokemon/changement pokemon/changement_pokemon_bulbizare.png', 0, 0)],
