@@ -392,11 +392,11 @@ class Combat:
                 
                 combat_pokeball = pygame.image.load('Combat pokemon/bag/bag_pokeball.png').convert_alpha()
                 combat_pokeball_mask = pygame.mask.from_surface(combat_pokeball)
-                DS.blit(combat_pokeball, (159, 562))
+                DS.blit(combat_pokeball, (0, 0))
                 
                 combat_potion = pygame.image.load('Combat pokemon/bag/bag_potion.png').convert_alpha()
                 combat_potion_mask = pygame.mask.from_surface(combat_potion)
-                DS.blit(combat_potion, (505, 562))                
+                DS.blit(combat_potion, (0, 0))                
                 
                 offset9 = (int(mx - 159), int(my - 562))
                 result9 = combat_pokeball_mask.overlap(combat_souris_mask, offset5)

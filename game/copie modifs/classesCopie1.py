@@ -363,20 +363,16 @@ class Combat:
                 attaque_4_rect = attaque_4.get_rect()
                 
 #                 ************************************************************************************************
-#                 DS.blit(attaque_1, attaque_pos[0])
-#                 DS.blit(attaque_2, attaque_pos[1])
-#                 DS.blit(attaque_3, attaque_pos[2])
-#                 DS.blit(attaque_4, attaque_pos[3])
+                DS.blit(attaque_1, (0, 0))
+                DS.blit(attaque_2, (0, 0))
+                DS.blit(attaque_3, (0, 0))
+                DS.blit(attaque_4, (0, 0))
                 
                 DS.blit(attaque0, attaque_pos[0])
                 DS.blit(attaque1, attaque_pos[1])
                 DS.blit(attaque2, attaque_pos[2])
                 DS.blit(attaque3, attaque_pos[3])
-                
-                DS.blit(attaque_1, (0, 0))
-                DS.blit(attaque_2, (0, 0))
-                DS.blit(attaque_3, (0, 0))
-                DS.blit(attaque_4, (0, 0))
+
                 pygame.display.update()
                 
                 
@@ -511,36 +507,36 @@ class Combat:
                     DS.blit(attaque.image, pokemon_pos[i])
                     i+=1
                 
-                offset11 = (int(mx - 159), int(my - 562))
-                result11 = self.joueur.equipe[0].mask_image.overlap(combat_souris_mask, offset11)
-                
-                offset12 = (int(mx - 505), int(my - 562))
-                result12 = self.joueur.equipe[1].mask_image.overlap(combat_souris_mask, offset12)
-                
-                offset13 = (int(mx - 159), int(my - 733))
-                result13 = self.joueur.equipe[2].mask_image.overlap(combat_souris_mask, offset13)
-                
-                offset14 = (int(mx - 506), int(my - 734))
-                result14 = self.joueur.equipe[3].mask_image.overlap(combat_souris_mask, offset14)
-                
-                if result11 and pygame.mouse.get_pressed()[0]:
-                    pokemon_choisi = 0
-                
-                if result12 and pygame.mouse.get_pressed()[0]:
-                    pokemon_choisi = 1
-                    
-                if result13 and pygame.mouse.get_pressed()[0]:
-                    pokemon_choisi = 2
-                    
-                if result14 and pygame.mouse.get_pressed()[0]:
-                    pokemon_choisi = 3
-                    
-                self.changement(pokemon_choisi)
+#                 offset11 = (int(mx - 159), int(my - 562))
+#                 result11 = self.joueur.equipe[0].mask_image.overlap(combat_souris_mask, offset11)
+#                 
+#                 offset12 = (int(mx - 505), int(my - 562))
+#                 result12 = self.joueur.equipe[1].mask_image.overlap(combat_souris_mask, offset12)
+#                 
+#                 offset13 = (int(mx - 159), int(my - 733))
+#                 result13 = self.joueur.equipe[2].mask_image.overlap(combat_souris_mask, offset13)
+#                 
+#                 offset14 = (int(mx - 506), int(my - 734))
+#                 result14 = self.joueur.equipe[3].mask_image.overlap(combat_souris_mask, offset14)
+#                 
+#                 if result11 and pygame.mouse.get_pressed()[0]:
+#                     pokemon_choisi = 0
+#                 
+#                 if result12 and pygame.mouse.get_pressed()[0]:
+#                     pokemon_choisi = 1
+#                     
+#                 if result13 and pygame.mouse.get_pressed()[0]:
+#                     pokemon_choisi = 2
+#                     
+#                 if result14 and pygame.mouse.get_pressed()[0]:
+#                     pokemon_choisi = 3
+#                     
+#                 self.changement(pokemon_choisi)
                 
             if len(self.joueur.equipe) == 0:
                 self.etat = False
                 vainqueur = self.adversaire
-            
+        print(vainqueur, self.pokemon_joueur, self.pokemon_adverse)    
         if vainqueur == self.joueur:
             for pokemon in self.joueur.equipe:
                 pokemon.xp += 10
