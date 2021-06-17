@@ -3,9 +3,9 @@ import pygame
 
 from classesCopie1 import *
 from variablesCopie1 import *
-# pygame.mixer.init()
-# pygame.mixer.music.load('sound/map_music.wav')
-# pygame.mixer.music.play(-1)
+pygame.mixer.init()
+pygame.mixer.music.load('sound/map_music.wav')
+pygame.mixer.music.play(-1)
 running = True
 # main loop
 while running:
@@ -36,8 +36,8 @@ while running:
     pnj.lance_combat(joueur)
     advers.lance_combat(joueur)
     
-#     test = Combat(joueur, advers)
-#     test.combat()
+    #test = Combat(joueur, advers)
+    #test.combat()
     
     pygame.display.update()
     CLOCK.tick(FPS)
