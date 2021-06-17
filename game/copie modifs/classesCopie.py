@@ -327,48 +327,65 @@ class Combat:
                 combat_menu_attaques = pygame.image.load('Combat pokemon/Combat_attaques_bag.png').convert_alpha()
                 DS.blit(combat_menu_attaques, (0, 0))
                 attaque_pos = [(159, 562), (505, 562), (159, 733), (506, 734)]  
-                i = 0
-                for attaque in self.pokemon_joueur.attaques:
-                    DS.blit(attaque.image, attaque_pos[i])
-                    i+=1
-                    pygame.display.update()
+                
+                attaque0 = self.pokemon_joueur.attaques[0].image
+                attaque0_rect = self.pokemon_joueur.attaques[0].image.get_rect()
+                attaque0_mask = pygame.mask.from_surface(self.pokemon_joueur.attaques[0].image)
+                
+                attaque1 = self.pokemon_joueur.attaques[1].image
+                attaque1_rect = self.pokemon_joueur.attaques[1].image.get_rect()
+                attaque1_mask = pygame.mask.from_surface(self.pokemon_joueur.attaques[1].image)
+
+                attaque2 = self.pokemon_joueur.attaques[2].image
+                attaque2_rect = self.pokemon_joueur.attaques[2].image.get_rect()
+                attaque2_mask = pygame.mask.from_surface(self.pokemon_joueur.attaques[2].image)
+                
+                attaque3 = self.pokemon_joueur.attaques[3].image
+                attaque3_rect = self.pokemon_joueur.attaques[3].image.get_rect()
+                attaque3_mask = pygame.mask.from_surface(self.pokemon_joueur.attaques[3].image)
+                
+                DS.blit(attaque0, attaque_pos[0])
+                DS.blit(attaque1, attaque_pos[1])
+                DS.blit(attaque2, attaque_pos[2])
+                DS.blit(attaque3, attaque_pos[3])
+                pygame.display.update()
+                
+                
+                
                 wait = True
                 while wait:
-                    self.pokemon_joueur.attaques[0].mask_image
-                    combat_run_rect = combat_run.get_rect()
-                    
-                    
-                    self.pokemon_joueur.attaques[0]_rect  = self.pokemon_joueur.attaques[0].get_rect()
-                    
-                    
-                    touching5 = self.pokemon_joueur.attaques[0]_rect.collidepoint(*pos) and self.pokemon_joueur.attaques[0].mask_image.get_at(pos_in_mask)
-                    offset5 = (int(mx - 159), int(my - 562))
-                    result5 = self.pokemon_joueur.attaques[0].mask_image.overlap(combat_souris_mask, offset5)
-                    
-                    offset6 = (int(mx - 505), int(my - 562))
-                    result6 = self.pokemon_joueur.attaques[1].mask_image.overlap(combat_souris_mask, offset6)
-                    
-                    offset7 = (int(mx - 159), int(my - 733))
-                    result7 = self.pokemon_joueur.attaques[2].mask_image.overlap(combat_souris_mask, offset7)
-                    
-                    offset8 = (int(mx - 506), int(my - 734))
-                    result8 = self.pokemon_joueur.attaques[3].mask_image.overlap(combat_souris_mask, offset8)
-                    
+                    for event in pygame.event.get():
+                        if event.type == pygame.MOUSEMOTION:
+                             pass
+                    pos = pygame.mouse.get_pos()
+                    print(pos, *pos)
+                    attaque0_rect.move(attaque_pos[0])
+                    print(pos[0], attaque0_rect.x, pos[1], attaque0_rect.y)
+                    pos_in_mask5 = pos[0], pos[1]
+                    pos_in_mask6 = pos[0]-attaque1_rect.x, pos[1]-attaque1_rect.y
+                    pos_in_mask7 = pos[0]-attaque2_rect.x, pos[1]-attaque2_rect.y
+                    pos_in_mask8 = pos[0]-attaque3_rect.x, pos[1]-attaque3_rect.y
+                    print(pos_in_mask5)
+                    touching5 = attaque0_rect.collidepoint(*pos) and attaque0_mask.get_at(pos_in_mask)
+                    touching6 = attaque1_rect.collidepoint(*pos) and attaque1_mask.get_at(pos_in_mask)
+                    touching7 = attaque2_rect.collidepoint(*pos) and attaque2_mask.get_at(pos_in_mask)
+                    touching8 = attaque3_rect.collidepoint(*pos) and attaque3_mask.get_at(pos_in_mask)
+
                     if touching5 and pygame.mouse.get_pressed()[0]:
                         attaque_choisie = 0
                         wait = False
-                    if result6 and pygame.mouse.get_pressed()[0]:
+                    if touching6 and pygame.mouse.get_pressed()[0]:
                         attaque_choisie = 1
                         wait = False
-                    if result7 and pygame.mouse.get_pressed()[0]:
+                    if touching7 and pygame.mouse.get_pressed()[0]:
                         attaque_choisie = 2
                         wait = False
-                    if result8 and pygame.mouse.get_pressed()[0]:
+                    if touching8 and pygame.mouse.get_pressed()[0]:
                         attaque_choisie = 3
                         wait = False
                 #attaque choisie = en fonction de sur quelle attaque on clique
                 self.pokemon_joueur.attaques[attaque_choisie].attaquer(self.pokemon_adverse)
-                
+#                 
             if action == 'utiliser objet':
                 combat_menu_objets = pygame.image.load('Combat pokemon/Combat_attaques_bag.png').convert_alpha()
                 DS.blit(combat_menu_objets, (0, 0))
