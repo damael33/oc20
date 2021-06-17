@@ -28,7 +28,7 @@ advers = Pokemon('bublizare', 'Plante', 0,
                  -200, 800)
 
 pnj = PNJCombat('Bob', [Pokemon('bublizare', 'Plante', 0, [Attaque('jet', 5, 'Eau', 30, 'Combat pokemon/potion.png')], 'Combat pokemon/souris.png', 'Combat pokemon/sprites pokemon/bulbizare/bulbisare_ennemi.png', 'Combat pokemon/changement pokemon/changement_pokemon_bulbizare.png', 0, 0)],
-                [], 100, 'Combat pokemon/souris.png', -750, 250)
+                [], 100, 'Combat pokemon/team_rocket.png', -750, 250)
 
 CENTER_HANDLE = 4
 

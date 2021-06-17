@@ -92,7 +92,7 @@ class Pokemon:
     def capturer(self):
         taux_echec = int((self.pv / self.pvmax) * 100)
         nbr_echec = []
-        while len(nbr_echec) < self.taux_echec:
+        while len(nbr_echec) < taux_echec:
             nbr = random.randint(1, 100)
             if nbr not in nbr_echec:
                 nbr_echec.append(nbr)
@@ -383,7 +383,6 @@ class Combat:
                         if event.type == pygame.MOUSEMOTION:
                              pass
                     pos = pygame.mouse.get_pos()
-                    print(pos, *pos)
 #                     attaque0_rect.move(attaque_pos[0])
 #                     print(pos[0], attaque0_rect.x, pos[1], attaque0_rect.y)
 #                     pos_in_mask5 = pos[0], pos[1]
@@ -401,7 +400,6 @@ class Combat:
 
                     if touching5 and pygame.mouse.get_pressed()[0]:
                         attaque_choisie = 0
-                        print('kassav')
                         wait = False
                     if touching6 and pygame.mouse.get_pressed()[0]:
                         attaque_choisie = 1
@@ -421,26 +419,35 @@ class Combat:
                 
                 combat_pokeball = pygame.image.load('Combat pokemon/bag/bag_pokeball.png').convert_alpha()
                 combat_pokeball_mask = pygame.mask.from_surface(combat_pokeball)
-                DS.blit(combat_pokeball, (159, 562))
+                combat_pokeball_rect = combat_pokeball.get_rect()
+                DS.blit(combat_pokeball, (0, 0))
                 
                 combat_potion = pygame.image.load('Combat pokemon/bag/bag_potion.png').convert_alpha()
                 combat_potion_mask = pygame.mask.from_surface(combat_potion)
-                DS.blit(combat_potion, (505, 562))                
+                combat_potion_rect = combat_potion.get_rect()
+                DS.blit(combat_potion, (0, 0))
+                pygame.display.update()
                 
-                offset9 = (int(mx - 159), int(my - 562))
-                result9 = combat_pokeball_mask.overlap(combat_souris_mask, offset5)
-                
-                offset10 = (int(mx - 505), int(my - 562))
-                result10 = combat_potion_mask.overlap(combat_souris_mask, offset5)
                 
                 objet = ''
                 
-                if result9 and pygame.mouse.get_pressed()[0]:
-                    objet = Item('pokeball', 'capture')
-                
-                if result10 and pygame.mouse.get_pressed()[0]:
-                    objet = Item('potion', 'soin')
-                
+                wait = True
+                while wait:
+                    for event in pygame.event.get():
+                        if event.type == pygame.MOUSEMOTION:
+                            pass
+                    
+                    touching9 = combat_pokeball_rect.collidepoint(*pos) and combat_pokeball_mask.get_at(pos_in_mask)
+                    print(touching9)
+                    touching10 = combat_potion_rect.collidepoint(*pos) and combat_potion_mask.get_at(pos_in_mask)
+                    if touching9 and pygame.mouse.get_pressed()[0]:
+                        objet = Item('pokeball', 'capture')
+                        print('carré')
+                        wait = False
+                    
+                    if touching10 and pygame.mouse.get_pressed()[0]:
+                        objet = Item('potion', 'soin')
+                        wait = False
                 #objet en fonction de sur lequel on clique
                 objet = Item('pokeball', 'capture')
                 
