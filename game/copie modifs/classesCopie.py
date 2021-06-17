@@ -385,7 +385,7 @@ class Combat:
                         wait = False
                 #attaque choisie = en fonction de sur quelle attaque on clique
                 self.pokemon_joueur.attaques[attaque_choisie].attaquer(self.pokemon_adverse)
-#                 
+                
             if action == 'utiliser objet':
                 combat_menu_objets = pygame.image.load('Combat pokemon/Combat_attaques_bag.png').convert_alpha()
                 DS.blit(combat_menu_objets, (0, 0))
