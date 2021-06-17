@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from classes import *
+from classesCopie import *
 #background
 
 

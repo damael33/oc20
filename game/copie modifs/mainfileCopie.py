@@ -1,8 +1,8 @@
 import math, random, sys
 import pygame
 
-from classes import *
-from variables import *
+from classesCopie import *
+from variablesCopie import *
 # pygame.mixer.init()
 # pygame.mixer.music.load('sound/map_music.wav')
 # pygame.mixer.music.play(-1)
