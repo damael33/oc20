@@ -270,15 +270,19 @@ class Combat:
         combat_template = pygame.image.load('Combat pokemon/Combat_template.png').convert_alpha()
         
         combat_attaque = pygame.image.load('Combat pokemon/Combat_mask(attaque).png').convert_alpha()
+        combat_attaque_rect = combat_attaque.get_rect()
         combat_attaque_mask = pygame.mask.from_surface(combat_attaque)
 
         combat_bag = pygame.image.load('Combat pokemon/Combat_mask(bag).png').convert_alpha()
+        combat_bag_rect = combat_bag.get_rect()
         combat_bag_mask = pygame.mask.from_surface(combat_bag)
         
         combat_pokemon = pygame.image.load('Combat pokemon/Combat_mask(pokemon).png').convert_alpha()
+        combat_pokemon_rect = combat_pokemon.get_rect()
         combat_pokemon_mask = pygame.mask.from_surface(combat_pokemon)
         
         combat_run = pygame.image.load('Combat pokemon/Combat_mask(pokemon).png').convert_alpha()
+        combat_run_rect = combat_run.get_rect()
         combat_run_mask = pygame.mask.from_surface(combat_run)
         
         
@@ -293,40 +297,24 @@ class Combat:
         pygame.display.update()
         while self.etat:
             
-            mx, my = pygame.mouse.get_pos()
-            combat_souris = pygame.image.load('Combat pokemon/souris.png').convert_alpha()
-            combat_souris_mask = pygame.mask.from_surface(combat_souris)
-            DS.blit(combat_souris,(mx, my))
-            
-            offset1 = (int(mx - 0), int(my - 0))
-            result1 = combat_attaque_mask.overlap(combat_souris_mask, offset1)
-            
-            offset2 = (int(mx - 0), int(my - 0))
-            result2 = combat_bag_mask.overlap(combat_souris_mask, offset2)
-            
-            offset3 = (int(mx - 0), int(my - 0))
-            result3 = combat_pokemon_mask.overlap(combat_souris_mask, offset3)
-            
-            offset4 = (int(mx - 0), int(my - 0))
-            result4 = combat_run_mask.overlap(combat_souris_mask, offset4)
-            
             action = ''
             while action == '':
-                for event in pygame.event.get():
-                    if event.type == pygame.MOUSEMOTION:
-                        mx, my = pygame.mouse.get_pos()
-                DS.blit(combat_souris,(mx, my))
-                pygame.display.update()
-                if result1 and pygame.mouse.get_pressed()[0]:
+                pos = pygame.mouse.get_pos()
+                pos_in_mask = pos[0], pos[1]
+                touching1 = combat_attaque_rect.collidepoint(*pos) and combat_attaque_mask.get_at(pos_in_mask)
+                touching2 = combat_attaque_rect.collidepoint(*pos) and combat_attaque_mask.get_at(pos_in_mask)
+                touching3 = combat_attaque_rect.collidepoint(*pos) and combat_attaque_mask.get_at(pos_in_mask)
+                touching4 = combat_attaque_rect.collidepoint(*pos) and combat_attaque_mask.get_at(pos_in_mask)
+                if touching1 and pygame.mouse.get_pressed()[0]:
                     action = 'attaquer'
                     
-                if result2 and pygame.mouse.get_pressed()[0]:
+                if touching2 and pygame.mouse.get_pressed()[0]:
                     action = 'utiliser objet'
                     
-                if result3 and pygame.mouse.get_pressed()[0]:
+                if touching3 and pygame.mouse.get_pressed()[0]:
                     action = 'changer'
                     
-                if result4 and pygame.mouse.get_pressed()[0]:
+                if touching4 and pygame.mouse.get_pressed()[0]:
                     action = 'run'
                 
             print(action)    #en fonction d'ou on appuie, l'action change
@@ -448,42 +436,42 @@ class Combat:
                 self.etat = False
                 
             self.pokemon_adverse.attaques[0].attaquer(self.pokemon_joueur)
-#             if self.pokemon_joueur.pv <= 0 and len(self.joueur.equipe) > 0:
-#                 self.joueur.mort.append(self.pokemon_joueur)
-#                 self.joueur.equipe.remove(self.pokemon_joueur)
-#                 combat_menu_pokemon = pygame.image.load('Combat pokemon/Combat_attaques_bag.png').convert_alpha()
-#                 DS.blit(combat_menu_pokemon, (0, 0))
-#                 pokemon_pos = [(159, 562), (505, 562), (159, 733), (506, 734)]
-#                 i = 0
-#                 for pokemon in self.joueur.equipe:
-#                     DS.blit(attaque.image, pokemon_pos[i])
-#                     i+=1
-#                 
-#                 offset11 = (int(mx - 159), int(my - 562))
-#                 result11 = self.joueur.equipe[0].mask_image.overlap(combat_souris_mask, offset11)
-#                 
-#                 offset12 = (int(mx - 505), int(my - 562))
-#                 result12 = self.joueur.equipe[1].mask_image.overlap(combat_souris_mask, offset12)
-#                 
-#                 offset13 = (int(mx - 159), int(my - 733))
-#                 result13 = self.joueur.equipe[2].mask_image.overlap(combat_souris_mask, offset13)
-#                 
-#                 offset14 = (int(mx - 506), int(my - 734))
-#                 result14 = self.joueur.equipe[3].mask_image.overlap(combat_souris_mask, offset14)
-#                 
-#                 if result11 and pygame.mouse.get_pressed()[0]:
-#                     pokemon_choisi = 0
-#                 
-#                 if result12 and pygame.mouse.get_pressed()[0]:
-#                     pokemon_choisi = 1
-#                     
-#                 if result13 and pygame.mouse.get_pressed()[0]:
-#                     pokemon_choisi = 2
-#                     
-#                 if result14 and pygame.mouse.get_pressed()[0]:
-#                     pokemon_choisi = 3
-#                     
-#                 self.changement(pokemon_choisi)
+            if self.pokemon_joueur.pv <= 0 and len(self.joueur.equipe) > 0:
+                self.joueur.mort.append(self.pokemon_joueur)
+                self.joueur.equipe.remove(self.pokemon_joueur)
+                combat_menu_pokemon = pygame.image.load('Combat pokemon/Combat_attaques_bag.png').convert_alpha()
+                DS.blit(combat_menu_pokemon, (0, 0))
+                pokemon_pos = [(159, 562), (505, 562), (159, 733), (506, 734)]
+                i = 0
+                for pokemon in self.joueur.equipe:
+                    DS.blit(attaque.image, pokemon_pos[i])
+                    i+=1
+                
+                offset11 = (int(mx - 159), int(my - 562))
+                result11 = self.joueur.equipe[0].mask_image.overlap(combat_souris_mask, offset11)
+                
+                offset12 = (int(mx - 505), int(my - 562))
+                result12 = self.joueur.equipe[1].mask_image.overlap(combat_souris_mask, offset12)
+                
+                offset13 = (int(mx - 159), int(my - 733))
+                result13 = self.joueur.equipe[2].mask_image.overlap(combat_souris_mask, offset13)
+                
+                offset14 = (int(mx - 506), int(my - 734))
+                result14 = self.joueur.equipe[3].mask_image.overlap(combat_souris_mask, offset14)
+                
+                if result11 and pygame.mouse.get_pressed()[0]:
+                    pokemon_choisi = 0
+                
+                if result12 and pygame.mouse.get_pressed()[0]:
+                    pokemon_choisi = 1
+                    
+                if result13 and pygame.mouse.get_pressed()[0]:
+                    pokemon_choisi = 2
+                    
+                if result14 and pygame.mouse.get_pressed()[0]:
+                    pokemon_choisi = 3
+                    
+                self.changement(pokemon_choisi)
                 
             if len(self.joueur.equipe) == 0:
                 self.etat = False
