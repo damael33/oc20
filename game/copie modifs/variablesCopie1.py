@@ -31,4 +31,4 @@ pnj = PNJCombat('Bob', [Pokemon('bublizare', 'Plante', 0, [Attaque('jet', 5, 'Ea
                 [], 100, 'Combat pokemon/team_rocket.png', -750, 250)
 
 CENTER_HANDLE = 4
-#Affinité de types et liste des types
+
