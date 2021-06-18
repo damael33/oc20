@@ -515,6 +515,9 @@ class Combat:
                     pokemon.pv = pokemon.pvmax
             if isinstance(self.adversaire, PNJCombat):
                 self.joueur.argent += self.adversaire.argent
+            
+            self.joueur.playerX += 50
+            self.joueur.playerY += 50
         else:
             self.joueur.argent *= (19/20)
             for pokemon in self.joueur.mort:
@@ -522,6 +525,9 @@ class Combat:
                 pokemon.pv = pokemon.pvmax
             for pokemon in self.joueur.equipe:
                 pokemon.pv = pokemon.pvmax
+            
+            self.joueur.playerX += 50
+            self.joueur.playerY += 50
         pygame.mixer.music.stop()
         
     def changement(self, nbr):
