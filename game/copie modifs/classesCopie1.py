@@ -264,8 +264,8 @@ class Combat:
         else:
             self.pokemon_adverse = self.adversaire
     def combat(self):
-        pygame.mixer.music.load('sound/combat_music.wav')
-        pygame.mixer.music.play(-1)
+        #pygame.mixer.music.load('sound/combat_music.wav')
+        #pygame.mixer.music.play(-1)
         
         combat_template = pygame.image.load('Combat pokemon/Combat_template.png').convert_alpha()
         
@@ -508,11 +508,20 @@ class Combat:
         if vainqueur == self.joueur:
             for pokemon in self.joueur.equipe:
                 pokemon.xp += 10
+                for pokemon in self.joueur.mort:
+                    self.joueur.equipe.append(pokemon)
+                    pokemon.pv = pokemon.pvmax
+                for pokemon in self.joueur.equipe:
+                    pokemon.pv = pokemon.pvmax
             if isinstance(self.adversaire, PNJCombat):
                 self.joueur.argent += self.adversaire.argent
         else:
             self.joueur.argent *= (19/20)
-        
+            for pokemon in self.joueur.mort:
+                self.joueur.equipe.append(pokemon)
+                pokemon.pv = pokemon.pvmax
+            for pokemon in self.joueur.equipe:
+                pokemon.pv = pokemon.pvmax
         pygame.mixer.music.stop()
         
     def changement(self, nbr):
